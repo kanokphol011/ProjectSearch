@@ -12,26 +12,21 @@ function searchB() {
         url: url ,
         type: 'GET',
         dataType :  'json',
-        //success : onSuccess,
-       //error : onError
+        
        success : function (data) {
            var x = data
-          //console.log(data.search-results);
-          console.log(x['search-results'].entry[0]);
-
+          //console.log(x['search-results']);
+          console.log(x['search-results'].entry[0]['preferred-name'].surname);
+          console.log(x['search-results']);
+          
           //window.location.href = "reult.htm?id=" ;
        }
     })  
-    // }).then(function (data) {
-    //     var x = data;
-    //    console.log(x.search-results);
+
 }  
 
         
-        
-    //     var row = data.search-results.entry[0].eid;
-    //    console.log(row);
-       
+  
     
    
 
