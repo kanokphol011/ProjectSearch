@@ -13,6 +13,8 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- cdn chart -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
     <title>Report</title>
 
 </head>
@@ -127,6 +129,30 @@
                     <div class="col-md-4 " id="showGraphofCitations">
 
                     </div>
+                     <div class="col-md-4 "></div>  
+                        <!-- bar chart canvas element -->
+                        <canvas id="income" width="300" height="200"></canvas>
+                             <script>
+                                        
+                                // bar chart data
+                                var barData = {
+                                labels : ["January","February","March","April","May","June"],
+                                datasets : [
+                                {
+                                    fillColor : "#48A497",
+                                    strokeColor : "#48A4D1",
+                                    data : [10,25,5,8,50,24]
+                                }
+                                    ]
+                                }
+                                        // get bar chart canvas
+                                        var income = document.getElementById("income").getContext("2d");
+                                        // draw bar chart
+                                        new Chart(income).Bar(barData);
+                                </script>
+                             
+
+                    
                     <button class="btn btn-info" onclick="javascript:alert('Save file')" id="searchC">
 
                         Save
@@ -140,6 +166,28 @@
                     <h4>Graph of Articles</h4>
                     <br>
                     <div class="col-md-4 " id="showGraphofArticles">
+
+                            <div class="col-md-4 "></div>  
+                            <!-- bar chart canvas element -->
+                            <canvas id="income2" width="300" height="200"></canvas>
+                                 <script>
+                                            
+                                    // bar chart data
+                                    var barData = {
+                                    labels : ["January","February","March","April","May","June"],
+                                    datasets : [
+                                    {
+                                        fillColor : "#48A497",
+                                        strokeColor : "#48A4D1",
+                                        data : [10,25,5,8,50,24]
+                                    }
+                                        ]
+                                    }
+                                            // get bar chart canvas
+                                            var income2 = document.getElementById("income2").getContext("2d");
+                                            // draw bar chart
+                                            new Chart(income2).Bar(barData);
+                                    </script>
 
                     </div>
                     <button class="btn btn-info" onclick="javascript:alert('Save file')" id="searchA">
