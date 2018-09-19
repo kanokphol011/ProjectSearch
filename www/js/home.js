@@ -2,7 +2,7 @@
  function collectJSON(){
  var xmlhttp = new XMLHttpRequest();
  var all = document.getElementById("searchAll").value;
- var url = 'https://api.elsevier.com/content/search/scopus?query=AUTHOR-NAME('+all+')&apiKey=c1012bdfeae663cbf772fda975c25fd3';
+ var url = 'https://api.elsevier.com/content/search/scopus?query=('+all+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
  
  xmlhttp.open("GET", url, false);
  xmlhttp.send();
@@ -16,9 +16,11 @@
  	 for(i =0;i<c;i++){
  	 	 r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>";
  	 }
+	  console.log(r);
  	
- 	
- 	 document.getElementById("show").innerHTML = r;
+	  document.getElementById("show").innerHTML = r;
+	  
+	  
  }
 }
  
