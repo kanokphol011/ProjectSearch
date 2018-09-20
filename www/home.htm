@@ -10,8 +10,18 @@
          function collectJSON(){
          var xmlhttp = new XMLHttpRequest();
          var auth = document.getElementById("author").value;
-         var url = 'https://api.elsevier.com/content/search/scopus?query=('+auth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
-         
+         var checkBox = document.getElementById("myCheck");
+         var url;
+
+         if (checkBox.checked == true){
+           url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+auth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
+
+         }else{
+           url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+auth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+
+         }
+         console.log(url);
+
          xmlhttp.open("GET", url, false);
          xmlhttp.send();
          if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
@@ -93,8 +103,9 @@
                         <br>
     
                         <div class="container">
-              <label for="Last-name">Search: </label><input type="text" id="author" name="author" required="required"><br>
-              <input type="checkbox" name="vehicle3" value="Boat" checked>Affiliation: College of Computing
+              <label for="name">Search: </label>
+              <input type="text" id="author" name="author" required="required"><br>
+              <input type="checkbox" name="myCheck"  id="myCheck">Affiliation: College of Computing
              <br><button id="btnClick" onclick="collectJSON();">Search</button>
              <div id="show"></div>
             
