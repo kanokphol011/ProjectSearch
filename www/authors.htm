@@ -7,13 +7,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-   
-    <!-- jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        function collectJSON(){
+        var xmlhttp = new XMLHttpRequest();
+        var Lauth = document.getElementById("Lauthor").value;
+        var Nauth = document.getElementById("Nauthor").value;    
+        console.log(Lauth,Nauth);
+        var url ='';
+        if(Nauth!=null && Lauth!=null && checkBox.checked == true ){
+           url = 'https://api.elsevier.com/content/search/scopus?query=authlast('+Lauth+')%20and%20authfirst('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe'; 
+            
+        } else if (Nauth == null && Lauth!=null && heckBox.checked != true ) {
+            url = 'https://api.elsevier.com/content/search/scopus?query=authlast('+Lauth+')%20and%20authfirst('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+
+        }else if (Nauth == null && Lauth!=null && heckBox.checked == true ) {
+            
+                url = 'https://api.elsevier.com/content/search/scopus?query=authlast('+Lauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        }else if (Nauth == null && Lauth!=null && heckBox.checked != true ) {
+            url = 'https://api.elsevier.com/content/search/scopus?query=authlast('+Lauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        }else if  (Nauth != null && Lauth == null && heckBox.checked == true ) {
+                url = 'https://api.elsevier.com/content/search/scopus?query=authlfirst('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
+     
+        }else
+    // if  (Nauth != null && Lauth == null && heckBox.checked != true )
+    {
+                url = 'https://api.elsevier.com/content/search/scopus?query=authfirst('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';    
+
+        }
+        console.log(url);
+
+        xmlhttp.open("GET", url, false);
+        xmlhttp.send();
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+        {
+             var result = xmlhttp.responseText;
+             var jsResult = JSON.parse(result);
+             
+             var c = jsResult["search-results"]["entry"].length;
+             var r = "";
+             for(i =0;i<c;i++){
+                  r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["preferred-name"]["surname"] + "</b> <i>"+jsResult["search-results"]["entry"][i]["preferred-name"]["given-name"]+"</i>,<i> "+jsResult["search-results"]["entry"][i]["affiliation-current"]["affiliation-name"]+"</i>,"+jsResult["search-results"]["entry"][i]["document-count"]+"</br>";
+             }
+             document.getElementById("show").innerHTML = r;
+        }
+        else{
+            alert("error:"+Error);
+
+        }
+
+       }
+        </script>
     <title>Authors</title>
 
 </head>
@@ -88,24 +134,15 @@
 
                     <div class="container">
                             <div class="form-group">
-                                <label for="search" class="col-md-1 control-label">Search</label>
-                                <br>
-                              <!-- <form id="authorsForm" class="form-horizontal" action="result.htm" method="GET" role="form"> -->
-                                    <div class="col-md-3">
+                               
+                                <label for="name">Name: </label>
+                                <input type="text" id="Nauthor" name="Nauthor" required="required"><br>
+                                <label for="name">Lastname: </label>
+                                <input type="text" id="Lauthor" name="Lauthor" required="required"><br>                               
+                                <div class="col-md-3">
 
-                                        <input type="text" class="form-control" id="searchAuthorsName" name="searchAuthorsName" placeholder="Authors name" maxlength="25"
-                                            autofocus>
-                                        <br>
-
-                                        <input type="checkbox" name="vehicle3" id="affiliation" value="College%20of%20Computing" checked>Affiliation: College of Computing
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control" id="searchAuthorLastName" name="searchAuthorsLastName" placeholder="Authors lastname"
-                                            maxlength="25" autofocus>
-                                    </div>
-
-
-                                <!-- </form> -->
+                         <input type="checkbox" name="vehicle3" id="affiliation" value="College%20of%20Computing" checked>Affiliation: College of Computing
+                                    </div>                   
                             </div>
                             
 
@@ -113,15 +150,11 @@
 
                     <div class="form-group">
                         <div class="col-md-2 col-md-offset-12">
-                            <a href="result.htm">
-                            <button class="btn btn-info" type="submit" onclick="searchB()" id="searchB">
-                                <span class="glyphicon glyphicon-search"></span> Search</button>
-                            </a>
-                            <br>
-                            <br>
+                            <br><button id="btnClick" onclick="collectJSON();">Search</button>
+                         
                         </div>
                     </div>
-                    <div  class="container" id="show"></div>
+             <div id="show"></div>
                   
                 </div>
 
@@ -192,10 +225,5 @@
     <br>
 
     </div>
-    <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="js/jquery.cookie.js"></script> -->
-    <script type="text/javascript" src="js/js.cookie.js"></script>
-    <script type="text/javascript" src="js/data.js"></script>
     
 </body>
