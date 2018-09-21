@@ -17,24 +17,27 @@
         var Nauth = document.getElementById("Nauthor").value;    
         console.log(Lauth,Nauth);
         var url ='';
-        if(Nauth!=null && Lauth!=null && checkBox.checked == true ){
-           url = 'https://api.elsevier.com/content/search/scopus?query=authlast('+Lauth+')%20and%20authfirst('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe'; 
-            
-        } else if (Nauth == null && Lauth!=null && heckBox.checked != true ) {
-            url = 'https://api.elsevier.com/content/search/scopus?query=authlast('+Lauth+')%20and%20authfirst('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        var afiil = '';
 
-        }else if (Nauth == null && Lauth!=null && heckBox.checked == true ) {
+
+        if( Nauth!=null&& Lauth!=null && checkBox.checked == true ){
+           url = 'https://api.elsevier.com/content/search/author?query=surname('+Lauth+')%20and%20given-name('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe'; 
             
-                url = 'https://api.elsevier.com/content/search/scopus?query=authlast('+Lauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
-        }else if (Nauth == null && Lauth!=null && heckBox.checked != true ) {
-            url = 'https://api.elsevier.com/content/search/scopus?query=authlast('+Lauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
-        }else if  (Nauth != null && Lauth == null && heckBox.checked == true ) {
-                url = 'https://api.elsevier.com/content/search/scopus?query=authlfirst('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        } else if (Nauth == null && Lauth!=null&& checkBox.checked != true) {
+            url = 'https://api.elsevier.com/content/search/author?query=surname('+Lauth+')%20and%20given-name('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+
+        }else if (Nauth == null && Lauth!=null && checkBox.checked == true ) {
+            
+                url = 'https://api.elsevier.com/content/search/author?query=surname('+Lauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        }else if (Nauth == null && Lauth!=null && checkBox.checked != true ) {
+            url = 'https://api.elsevier.com/content/search/author?query=surname('+Lauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        }else if  (Nauth != null && Lauth == null && checkBox.checked == true ) {
+                url = 'https://api.elsevier.com/content/search/author?query=surname('+Lauth+')%20and%20given-name('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
      
         }else
     // if  (Nauth != null && Lauth == null && heckBox.checked != true )
     {
-                url = 'https://api.elsevier.com/content/search/scopus?query=authfirst('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';    
+                url = 'https://api.elsevier.com/content/search/scopus?query=surname('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';    
 
         }
         console.log(url);
@@ -141,7 +144,7 @@
                                 <input type="text" id="Lauthor" name="Lauthor" required="required"><br>                               
                                 <div class="col-md-3">
 
-                         <input type="checkbox" name="vehicle3" id="affiliation" value="College%20of%20Computing" checked>Affiliation: College of Computing
+                         <input type="checkbox" name="checkBox" id="checkBox" value="College%20of%20Computing" checked>Affiliation: College of Computing
                                     </div>                   
                             </div>
                             
