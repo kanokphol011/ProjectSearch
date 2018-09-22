@@ -8,11 +8,60 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <!-- jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        function collectJSON(){
+        var xmlhttp = new XMLHttpRequest();
+        var Title = document.getElementById("searchTitleName").value;
+        var Author = document.getElementById("searchAuthorsName").value;     
+        var Keyword = document.getElementById("searchKeyword").value;            
+        var Exclude = document.getElementById("searchExclude").value;            
+        var DateOne = document.getElementById("searchDateOne").value;   
+        var Datetwo = document.getElementById("searchDatetwo").value;      
+        var ApiKey ="&apiKey=185547eee67ed06e5e817a0f227d23fe";             
+        var url ='';
+        if(!Nauth === false && !Lauth == false && checkBox.checked === true ){
+          url = 'https://api.elsevier.com/content/search/author?query=authlast('+Lauth+')%20and%20authfirst('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';         
+        } 
+        if (!Nauth == false && !Lauth == false && checkBox.checked === false) {
+            url = 'https://api.elsevier.com/content/search/author?query=authlast('+Lauth+')%20and%20authfirst('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        }
+        if (!Nauth === true && !Lauth == false && checkBox.checked === true ) {
+           url = 'https://api.elsevier.com/content/search/author?query=authlast('+Lauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';        }
+        if (!Nauth === true && !Lauth==false && checkBox.checked === false ) {
+            url = 'https://api.elsevier.com/content/search/author?query=authlast('+Lauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        }
+        if  (!Nauth === false &&!Lauth ===true && checkBox.checked === true ) {
+            url = 'https://api.elsevier.com/content/search/author?query=authfirst('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        }
+        if  (!Nauth === false && !Lauth === true && checkBox.checked === false ) {
+            url = 'https://api.elsevier.com/content/search/scopus?query=authfirst('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';    
+        }
+        xmlhttp.open("GET", url, false);
+        xmlhttp.send();
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+        {
+             var result = xmlhttp.responseText;
+             var jsResult = JSON.parse(result);
+             
+             var c = jsResult["search-results"]["entry"].length;
+             var r = "";
+             for(i =0;i<c;i++){
+                r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>";
+
+                 // r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["preferred-name"]["surname"] + "</b> <i>"+jsResult["search-results"]["entry"][i]["preferred-name"]["given-name"]+"</i>,<i> "+jsResult["search-results"]["entry"][i]["affiliation-current"]["affiliation-name"]+"</i>,"+jsResult["search-results"]["entry"][i]["document-count"]+"</br>";
+             }
+             document.getElementById("show").innerHTML = r;
+        }
+        else{
+            console.log(Error);
+            console.log(ErrorEvent)
+
+        }
+
+       }
+        </script>
     <title>Advanced</title>
 
 </head>
@@ -90,7 +139,7 @@
                             <div class="form-group">
                                 <label for="search" class="col-md-1 control-label">Search</label>
                                 <br>
-                                <form id="advancedForm" class="form-horizontal" action="" method="POST" role="form">
+                                <!-- <form id="advancedForm" class="form-horizontal" action="" method="POST" role="form"> -->
                                     <div class="col-md-3">
                                         <input type="text" class="form-control" id="searchTitleName" name="searchTitleName" placeholder="Title name" maxlength="25"
                                             autofocus>
@@ -106,8 +155,10 @@
                                         <input type="date" class="form-control" id="searchDateOne" name="searchDateOne" placeholder="Date" autofocus>
 
                                         <br>
-                                        <input type="checkbox" name="vehicle3" value="Boat" checked>Affiliation: College of Computing
-                                    </div>
+
+                                        <input type="checkbox" name="checkBox" id="checkBox" value="College%20of%20Computing"
+                                        checked="checked">Affiliation: College of Computing  
+                                                                      </div>
 
                                     <div class="col-sm-1">
                                         <center>
@@ -144,17 +195,15 @@
                                     </div>
 
 
-                                </form>
+                                <!-- </form> -->
                             </div>
 
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-2 col-md-offset-12">
-                            <a href="result.htm">
-                            <button class="btn btn-info" type="submit" id="searchB">
-                                <span class="glyphicon glyphicon-search"></span> Search</button>
-                            </a>
+                            <br><button id="btnClick" onclick="collectJSON();">Search</button>
+
                             <br>
                             <br>
                         </div>
@@ -178,18 +227,20 @@
                         <li class="col-md-9">
                             <a id="btn">History</a>
                         </li>
-                        <form id="historyForm" class="form-horizontal" action="" method="POST" role="form">
+                        <!-- <form id="historyForm" class="form-horizontal" action="" method="POST" role="form"> -->
                             <div class="form-group col-md-2">
                                 <input type="text" class="form-control" id="history" name="history" placeholder="Search" maxlength="100" autofocus>
 
                             </div>&nbsp;&nbsp;
                             <span class="glyphicon glyphicon-search"></span>
-                        </form>
+                        <!-- </form> -->
 
 
                         </ul>
                     </div>
                 </legend>
+
+                <div id="show"></div>
 
                 <div class="col-md-9">
                     <br>
