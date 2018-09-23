@@ -1,38 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-
-        function collectJSON(){
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+         <script>
+        
+         function collectJSON(){
          var xmlhttp = new XMLHttpRequest();
-         var auth = document.getElementById("author").value;
-         var checkBox = document.getElementById("myCheck");
-         var url;
-
-         if (checkBox.checked == true){
-           url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+auth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
-
-         }else{
-           url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+auth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
-
+         var all = document.getElementById("all").value;
+        // var url = 'https://api.elsevier.com/content/search/scopus?query=AUTHOR-NAME('+auth+')&apiKey=c1012bdfeae663cbf772fda975c25fd3';
+         
+        if (!checkBox.checked === true){
+         url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+all+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
+ 
+          }else{
+            url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+all+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
          }
-         console.log(url);
-
          xmlhttp.open("GET", url, false);
          xmlhttp.send();
          if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
          {
               var result = xmlhttp.responseText;
               var jsResult = JSON.parse(result);
-              console.log(jsResult);
+              
               var c = jsResult["search-results"]["entry"].length;
               var r = "";
               for(i =0;i<c;i++){
@@ -43,7 +36,7 @@
               document.getElementById("show").innerHTML = r;
          }
         }
-    </script>
+         </script>
     <title>Home</title>
 
 </head>
@@ -120,12 +113,11 @@
                         <div class="form-group">
 
                             <label for="name">Seach </label>
-                            <input type="text" class="form-control" id="author" name="author" required="required"><br>
+                            <input type="text" class="form-control" id="all" name="all" required="required"><br>
                             
-                            <div class="col-md-5">
-
-                                <input type="checkbox" name="checkBox" id="checkBox" value="College%20of%20Computing"
-                                    checked="checked">Affiliation: College of Computing
+                            <div class="col-md-4">
+                                 <!-- <input id="author" name="author" required="required" type="text"> -->
+                                <input type="checkbox" name="checkBox" id="checkBox" checked="checked">Affiliation: College of Computing
                             </div>
                         </div>
 
