@@ -31,7 +31,7 @@
             url = 'https://api.elsevier.com/content/search/author?query=authfirst('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
         }
         if  (!Nauth === false && !Lauth === true && checkBox.checked === false ) {
-            url = 'https://api.elsevier.com/content/search/scopus?query=authfirst('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';    
+            url = 'https://api.elsevier.com/content/search/author?query=authfirst('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';    
         }
         xmlhttp.open("GET", url, false);
         xmlhttp.send();

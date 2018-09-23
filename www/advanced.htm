@@ -14,30 +14,65 @@
         function collectJSON(){
         var xmlhttp = new XMLHttpRequest();
         var Title = document.getElementById("searchTitleName").value;
-        var Author = document.getElementById("searchAuthorsName").value;     
+        var Nauth = document.getElementById("searchAuthorsName").value;
+        var Lauth = document.getElementById("searchAuthorLastsname").value;         
         var Keyword = document.getElementById("searchKeyword").value;            
         var Exclude = document.getElementById("searchExclude").value;            
         var DateOne = document.getElementById("searchDateOne").value;   
         var Datetwo = document.getElementById("searchDatetwo").value;      
         var ApiKey ="&apiKey=185547eee67ed06e5e817a0f227d23fe";             
         var url ='';
-        if(!Nauth === false && !Lauth == false && checkBox.checked === true ){
-          url = 'https://api.elsevier.com/content/search/author?query=authlast('+Lauth+')%20and%20authfirst('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';         
+        var Keyword = document.getElementById("searchKeyword").value;            
+        if(!Title === false && !Lauth == false && !Nauth === false && !Keyword == false && !Exclude == false && !DateOne == false && !Datetwo == false && checkBox.checked === true ){
+          url = 'https://api.elsevier.com/content/search/scopus?query=title('+Title+')%20and%20authlast('+Lauth+')%20and%20authfirst('+Nauth+')%20and%authkeywords('+Keyword+')%20and%EXACTSRCTITLE('+Exclude+')%20and%coverDate('+DateOne+')%20and%coverDate('+Datetwo+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+        console.log(1)
         } 
-        if (!Nauth == false && !Lauth == false && checkBox.checked === false) {
-            url = 'https://api.elsevier.com/content/search/author?query=authlast('+Lauth+')%20and%20authfirst('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        if(!Title === false && !Lauth == false && !Nauth === false   && !Keyword == false && !Exclude == false && !DateOne == true && !Datetwo == true && checkBox.checked === true ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=title('+Title+')%20and%20authlast('+Lauth+')%20and%20authfirst('+Nauth+')%20and%authkeywords('+Keyword+')%20and%EXACTSRCTITLE('+Exclude+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(2)  
+        } 
+        if(!Title === false && !Lauth == false && !Nauth === false  && !Keyword == false && !Exclude == true && !DateOne == true && !Datetwo == true && checkBox.checked === true ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=title('+Title+')%20and%20authlast('+Lauth+')%20and%20authfirst('+Nauth+')%20and%authkeywords('+Keyword+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(3)
+        } 
+        if(!Title === false && !Lauth == false && !Nauth === false  && !Keyword == true && !Exclude == true && !DateOne == true && !Datetwo == true && checkBox.checked === true ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=title('+Title+')%20and%20authlast('+Lauth+')%20and%20authfirst('+Nauth+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(4)
+        } 
+        if(!Title === false && !Lauth == false && !Nauth === true  && !Keyword == true && !Exclude == true && !DateOne == true && !Datetwo == true && checkBox.checked === true ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=title('+Title+')%20and%20authlast('+Lauth+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(5)  
+        } 
+        if(!Title === false && !Lauth == true && !Nauth === true  && !Keyword == true && !Exclude == true && !DateOne == true && !Datetwo == true && checkBox.checked === true ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=title('+Title+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(6)
+        } 
+        if(!Title === true && !Lauth == false && !Nauth === false && !Keyword == false && !Exclude == false && !DateOne == false && !Datetwo == false && checkBox.checked === true ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=authlast('+Lauth+')%20and%20authfirst('+Nauth+')%20and%authkeywords('+Keyword+')%20and%EXACTSRCTITLE('+Exclude+')%20and%coverDate('+DateOne+')%20and%coverDate('+Datetwo+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(7)
+        } 
+        if(!Title === true && !Lauth == true && !Nauth === false && !Keyword == false && !Exclude == false && !DateOne == false && !Datetwo == false && checkBox.checked === true ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=authfirst('+Nauth+')%20and%authkeywords('+Keyword+')%20and%EXACTSRCTITLE('+Exclude+')%20and%coverDate('+DateOne+')%20and%coverDate('+Datetwo+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(8)  
+        } 
+        if(!Title === true && !Lauth == true && !Nauth === true && !Keyword == false && !Exclude == false && !DateOne == false && !Datetwo == false && checkBox.checked === true ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=authkeywords('+Keyword+')%20and%EXACTSRCTITLE('+Exclude+')%20and%coverDate('+DateOne+')%20and%coverDate('+Datetwo+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(9)
+        } 
+        if(!Title === true && !Lauth == true && !Nauth === true && !Keyword == false && !Exclude == false && !DateOne == false && !Datetwo == false && checkBox.checked === true ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=authkeywords('+Keyword+')%20and%EXACTSRCTITLE('+Exclude+')%20and%coverDate('+DateOne+')%20and%coverDate('+Datetwo+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(10)
         }
-        if (!Nauth === true && !Lauth == false && checkBox.checked === true ) {
-           url = 'https://api.elsevier.com/content/search/author?query=authlast('+Lauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';        }
-        if (!Nauth === true && !Lauth==false && checkBox.checked === false ) {
-            url = 'https://api.elsevier.com/content/search/author?query=authlast('+Lauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        if(!Title === true && !Lauth == true && !Nauth === true && !Keyword == true && !Exclude == false && !DateOne == false && !Datetwo == false && checkBox.checked === true ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=EXACTSRCTITLE('+Exclude+')%20and%coverDate('+DateOne+')%20and%coverDate('+Datetwo+')%20AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(11)
         }
-        if  (!Nauth === false &&!Lauth ===true && checkBox.checked === true ) {
-            url = 'https://api.elsevier.com/content/search/author?query=authfirst('+Nauth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
+        if(!Title === true && !Lauth == true && !Nauth === true && !Keyword == true && !Exclude == true && !DateOne == true && !Datetwo == true && checkBox.checked === false ){
+            url = 'https://api.elsevier.com/content/search/scopus?query=AFFIL(College%20of%20Computing)'+ApiKey;         
+            console.log(12)
         }
-        if  (!Nauth === false && !Lauth === true && checkBox.checked === false ) {
-            url = 'https://api.elsevier.com/content/search/scopus?query=authfirst('+Nauth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';    
-        }
+
+
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
