@@ -11,14 +11,23 @@
          function collectJSON(){
          var xmlhttp = new XMLHttpRequest();
          var all = document.getElementById("all").value;
+         var url ='';
+         console.log(all,checkBox.checked);
         // var url = 'https://api.elsevier.com/content/search/scopus?query=AUTHOR-NAME('+auth+')&apiKey=c1012bdfeae663cbf772fda975c25fd3';
          
-        if (!checkBox.checked === true){
-         url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+all+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
- 
-          }else{
+        if (!all === false && !checkBox.checked === false){
+         url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+all+')%20AFFIL(Prince%20of%20Songkla%20University)&apiKey=185547eee67ed06e5e817a0f227d23fe'; 
+        console.log(1);      
+      }
+        if(!all === false && !checkBox.checked === true){
             url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+all+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
-         }
+            console.log(2);        
+        }
+         if(!all === true && !checkBox.checked === false){
+            url = 'https://api.elsevier.com/content/search/scopus?query=AFFIL(Prince%20of%20Songkla%20University)&apiKey=185547eee67ed06e5e817a0f227d23fe';
+            console.log(3);     
+        }
+         console.log(url)
          xmlhttp.open("GET", url, false);
          xmlhttp.send();
          if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
@@ -116,8 +125,8 @@
                             <input type="text" class="form-control" id="all" name="all" required="required"><br>
                             
                             <div class="col-md-4">
-                                 <!-- <input id="author" name="author" required="required" type="text"> -->
-                                <input type="checkbox" name="checkBox" id="checkBox" checked="checked">Affiliation: College of Computing
+                                <input type="checkbox" name="checkBox" id="checkBox" 
+                                    checked="checked">Affiliation: Prince of Songkla University
                             </div>
                         </div>
 
