@@ -88,13 +88,28 @@
 
                 <div class="col-md-9">
                     <br>
-
                     <div class="container">
-
-
-
                         <div class="col-md-6">
+
+                            <!-- ShownameAJ. -->
                             <div class="showNameAj" id="showNameAj">
+
+                                <?php
+                                    //connect to mysql database
+                                    $con = mysqli_connect("127.0.0.1", "root", "", "staffcoc") or die("Error " . mysqli_error($con));
+                                    $sql = "SELECT staffName,staffLName,position FROM staffcoc.staffcoc";
+                                    $result = $con->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                    // output data of each row
+                                    while($row = $result->fetch_assoc()) {
+                                    echo " " . $row["position"]. $row["staffName"]. "&nbsp&nbsp" . $row["staffName"]. "<br>";
+                                    }
+                                    } else {
+                                   echo "0 results";
+                                    }
+                                    $con->close();
+                                ?>
 
                             </div>
                             <a href="searchAllStaffs.htm">
