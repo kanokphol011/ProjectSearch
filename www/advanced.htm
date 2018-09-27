@@ -21,24 +21,18 @@
         var DateFrom =document.getElementById("DateFrom").value;
        
         var ApiKey = '&apiKey=185547eee67ed06e5e817a0f227d23fe';         
-        var url ='';
+        
         var y = "";
         //url = 'https://api.elsevier.com/content/search/scopus?query=EXACTSRCTITLE('+Title+')&authlast('+Lauth+')&authfirst('+Nauth+')&AFFIL(Prince%20of%20Songkla%20University)&apiKey=185547eee67ed06e5e817a0f227d23fe'; 
         var x='https://api.elsevier.com/content/search/scopus?';
-            console.log(Title);
-            console.log(Lauth);
-            console.log(Nauth);
-            console.log(Keyword);
-            console.log(Exclude);
-            console.log(DateFrom);
 
         if(!Title === false){
             if(!y===true){
-               
+                y+=x+'query=title('+Title+')';
                 console.log(1);
             }
             else{
-                y+=x+'query=title('+Title+')';
+               // y+=x+'query=title('+Title+')';
                 console.log(2);
             }
         }
@@ -104,6 +98,7 @@
         }
         
         console.log(y+ApiKey);
+        var url =y+ApiKey;
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
@@ -114,9 +109,9 @@
              var c = jsResult["search-results"]["entry"].length;
              var r = "";
              for(i =0;i<c;i++){
-               // r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>";
+                r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>";
 
-                r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["preferred-name"]["surname"] + "</b> ,<i>"+jsResult["search-results"]["entry"][i]["preferred-name"]["given-name"]+"</i> <i> "+jsResult["search-results"]["entry"][i]["affiliation-current"]["affiliation-name"]+"</i>,"+jsResult["search-results"]["entry"][i]["document-count"]+"</br>";
+                //r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["preferred-name"]["surname"] + "</b> ,<i>"+jsResult["search-results"]["entry"][i]["preferred-name"]["given-name"]+"</i> <i> "+jsResult["search-results"]["entry"][i]["affiliation-current"]["affiliation-name"]+"</i>,"+jsResult["search-results"]["entry"][i]["document-count"]+"</br>";
              }
              document.getElementById("show").innerHTML = r;
         }
