@@ -80,16 +80,17 @@
         }
         if(!DateFrom === false){
             if(!y=== true){
-                y+=x+'query=PUBYEAR('+DateFrom+')';
+                y+=x+'query=PUBYEAR%20='+DateFrom;
                 console.log(11);
             } 
             else {
-                y+='&PUBYEAR('+DateFrom+')';       
+                y+='&PUBYEAR%20='+DateFrom;       
                 console.log(12);
             }
         }
-        if(!checkBox.checked === true){
+        if(!checkBox.checked === false){
             if(!y=== true){
+                y+=x+'query=AFFIL(Prince%20of%20Songkla%20University)';
               console.log(13);
             } 
             else {
