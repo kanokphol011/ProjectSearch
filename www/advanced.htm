@@ -40,11 +40,11 @@
         if(!Lauth === false){
 
             if(!y=== true){
-               y+=x+'query=authlast('+Lauth+')';
+               y+=x+'query=AUTHLASTNAME('+Lauth+')';
                console.log(2);
             }  
             else{
-                y+='&authlast('+Lauth+')';
+                y+='&AUTHLASTNAME('+Lauth+')';
                 console.log(3);  
             }         
         }
@@ -70,11 +70,11 @@
         }
         if(!Exclude === false){
             if(!y=== true){
-                y+=x+'query=EXCLUDE('+Exclude+')';
+                y+=x+'query=NOT%20KEY('+Exclude+')';
                 console.log(9);
             } 
             else {
-                y+='&EXCLUDE('+Exclude+')';       
+                y+='&NOT%20KEY('+Exclude+')';       
                 console.log(10);
             }
         }
