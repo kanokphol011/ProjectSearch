@@ -66,9 +66,16 @@ $(function(){
            meet =jsResult["search-results"]["entry"][i]["link"][2]["@href"];
            console.log(meet);
            you += i+1 +". <b><a href="+meet+">"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</a></b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>"+ "<p> Number of Citations:"+ jsResult["search-results"]["entry"][i]["citedby-count"]+"</p><br>";
-        
+           
             //r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["preferred-name"]["surname"] + "</b> ,<i>"+jsResult["search-results"]["entry"][i]["preferred-name"]["given-name"]+"</i> <i> "+jsResult["search-results"]["entry"][i]["affiliation-current"]["affiliation-name"]+"</i>,"+jsResult["search-results"]["entry"][i]["document-count"]+"</br>";
-          
+            function senttoreport(){
+                window.location.host('reportStaffs.htm?id='+tid+'&name'+name+'&lastname'+lastname);
+                
+            }
+                // var btn = document.getElementById('searchV');
+                // btn.addEventListener('click', function() {
+                //   document.location.href = 'reportStaffs.htm?id='+tid+'&name'+name+'&lastname'+lastname;
+                // });
         
         }
          document.getElementById("showresultStaff").innerHTML = you;
@@ -79,31 +86,31 @@ $(function(){
     }
 })
 
-$(function(){
-    var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
-    var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
-    url = x+name+'%20AND%20'+lastname+')&'+'PUBYEAR%20=%20'+DateFrom+y;
-    console.log(url);
-    xmlhttp.open("GET", url, false);
-    xmlhttp.send();
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-    {
-         var result = xmlhttp.responseText;
-         var jsResult = JSON.parse(result);
+// $(function(){
+//     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
+//     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
+//     url = x+name+'%20AND%20'+lastname+')&'+'PUBYEAR%20=%20'+DateFrom+y;
+//     console.log(url);
+//     xmlhttp.open("GET", url, false);
+//     xmlhttp.send();
+//     if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+//     {
+//          var result = xmlhttp.responseText;
+//          var jsResult = JSON.parse(result);
          
-         var c = jsResult["search-results"]["entry"].length;
+//          var c = jsResult["search-results"]["entry"].length;
         
-         for(i =0;i<c;i++){
+//          for(i =0;i<c;i++){
 
-           issuse = +jsResult["search-results"]["entry"][i]["citedby-count"];          
-           total = "<h5>Number of Articles : "+parseInt(issuse)+"</h5>";
-           //meet =jsResult["search-results"]["entry"][i]["link"][2]["@href"];
-           //console.log(meet);
-           you += i+1 +". <b><a href=reportStaffs.htm>"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</a></b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>"+ "<p> Number of Citations:"+ jsResult["search-results"]["entry"][i]["citedby-count"]+"</p><br><br>";
+//            issuse = +jsResult["search-results"]["entry"][i]["citedby-count"];          
+//            total = "<h5>Number of Articles : "+parseInt(issuse)+"</h5>";
+//            //meet =jsResult["search-results"]["entry"][i]["link"][2]["@href"];
+//            //console.log(meet);
+//            you += i+1 +". <b><a href=reportStaffs.htm>"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</a></b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>"+ "<p> Number of Citations:"+ jsResult["search-results"]["entry"][i]["citedby-count"]+"</p><br><br>";
         
-            //r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["preferred-name"]["surname"] + "</b> ,<i>"+jsResult["search-results"]["entry"][i]["preferred-name"]["given-name"]+"</i> <i> "+jsResult["search-results"]["entry"][i]["affiliation-current"]["affiliation-name"]+"</i>,"+jsResult["search-results"]["entry"][i]["document-count"]+"</br>";      
-        }
-         document.getElementById("showC").innerHTML = you;
-         document.getElementById("NumberCitations").innerHTML = total;
-    }
-})
+//             //r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["preferred-name"]["surname"] + "</b> ,<i>"+jsResult["search-results"]["entry"][i]["preferred-name"]["given-name"]+"</i> <i> "+jsResult["search-results"]["entry"][i]["affiliation-current"]["affiliation-name"]+"</i>,"+jsResult["search-results"]["entry"][i]["document-count"]+"</br>";      
+//         }
+//          document.getElementById("showC").innerHTML = you;
+//          document.getElementById("NumberCitations").innerHTML = total;
+//     }
+// })
