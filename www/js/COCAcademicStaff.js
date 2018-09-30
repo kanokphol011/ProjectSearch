@@ -1,7 +1,5 @@
 var xmlhttp = new XMLHttpRequest();
 $(function(){
-
-    
     var url ='https://staffcoc.000webhostapp.com/db.json';
     xmlhttp.open("GET", url, false);
     xmlhttp.send();

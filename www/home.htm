@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         
          <script>
-        
+  
          function collectJSON(){
          var xmlhttp = new XMLHttpRequest();
          var all = document.getElementById("all").value;
@@ -38,7 +40,8 @@
               var c = jsResult["search-results"]["entry"].length;
               var r = "";
               for(i =0;i<c;i++){
-                   r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>";
+                var meet =jsResult["search-results"]["entry"][i]["link"][2]["@href"];
+                   r += i+1 +". <b><a href="+meet+">"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</a></b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>";
               }
              
              
@@ -105,7 +108,7 @@
                                 <a href="home.htm" id="btn">All</a>
                             </li>
                             <li>
-                                <a href="http://127.0.0.1:8080/www/authors.htm" id="btn">Authors</a>
+                                <a href="authors.htm" id="btn">Authors</a>
                             </li>
                             <li>
                                 <a href="advanced.htm" id="btn">Advanced</a>
