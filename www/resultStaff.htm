@@ -91,17 +91,18 @@
 
                 <div class="col-md-3  " id="image">
                     <div id="NumberofArticles"> </div>                 
-                    <input type="year" id="DateFrom" name="year" placeholder="Year"  minlength="4" maxlength="4" required="Date"> <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" id="DateYear" name="year" placeholder="Year"  minlength="4" maxlength="4" required="required"> <br>
+                        
                    
                     
 
                     <br>
                     <div ></div>
-                    <input type="button" id="btn" value="View Report" onClick="javascript: window.open('reportStaffs.htm/' + document.getElementById('DateFrom').value);" />
+                    <button type="button" id="btn" value="submit" onclick="myFunction()" >View Report </button>
+                     <!-- + id=+tid+&name=+name+&lastname=+lastname+&year= -->
                     <a href="reportStaffs.htm"></a>
                     <!-- <button class="btn btn-info" type="submit" id="searchV" onclick="reportStaffs.htm"> -->
-                        View Report
+                        <!-- View Report -->
                         <!-- <span class="glyphicon glyphicon-share-alt"></span>
                     </button> -->
                 </a>

@@ -2,7 +2,8 @@ var xmlhttp = new XMLHttpRequest();
 var urlSearchParams = URL.searchParams;
 let params = (new URL(document.location)).searchParams;
 let tid = params.get("id");
-var DateFrom =document.getElementById("DateFrom").value;
+var DateFrom = document.getElementById("DateYear").length;
+// console.log(DateFrom);
 var url='';
 var name,lastname,meet,issuse,total,to,you;
 $(function(){
@@ -64,11 +65,8 @@ $(function(){
            }
          
            meet =jsResult["search-results"]["entry"][i]["link"][2]["@href"];
-           console.log(meet);
-           you += i+1 +". <b><a href="+meet+">"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</a></b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>"+ "<p> Number of Citations:"+ jsResult["search-results"]["entry"][i]["citedby-count"]+"</p><br>";
-           
-    
-        
+          // console.log(meet);
+           you += i+1 +". <b><a href="+meet+">"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</a></b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>"+ "<p> Number of Citations:"+ jsResult["search-results"]["entry"][i]["citedby-count"]+"</p><br>";      
         }
          document.getElementById("showresultStaff").innerHTML = you;
          document.getElementById("NumberofArticles").innerHTML = total;
@@ -77,11 +75,19 @@ $(function(){
         document.getElementById("showresult").innerHTML = text;
     }
 })
+function myFunction() {
+   
+    // $("#btn").click( function() {
+        xmlhttp.open("GET", url, false);
+        xmlhttp.send();
 
-$("#btn").click( function() {
-    var url = "reportStaffs.htm?" + $("#DateForm").val();
-    window.open(url);
-});
+        var url = "reportStaffs.htm?id="+tid+"&name="+name+"&lastname="+lastname+"&year="+DateFrom;
+       window.location.assign(url);
+    // });
+
+}
+// )
+
 // $(function(){
 //     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
 //     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
