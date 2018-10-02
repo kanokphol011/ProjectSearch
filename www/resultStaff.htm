@@ -8,13 +8,17 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
-    <title>COC Academic Staff</title>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Result</title>
 
 </head>
 
 <body background="">
+    <div class="loader"></div>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -58,69 +62,69 @@
 
         </div>
         <br>
-      
-        <br>
         <div class="container">
             <div class="row" style=background-color:#ccccb3;>
-                <legend>
-                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <legend>
                         <ul class="nav navbar-nav">&nbsp;</ul>
                         <ul class="nav navbar-nav navbar-left"></ul>
-                        <ul class="col-md-9">
-                            <h3>List of COC academic staff</h3>
+                        <div class="col-md-9" id="Name">
                             
-                        </ul>
+                        </div>
                         <form id="searchForm" class="form-horizontal" action="" method="POST" role="form">
                             <div class="form-group col-md-2">
-                                <input type="text" class="form-control" id="search" name="search" placeholder="Search" maxlength="100" autofocus>
+                                <input type="text" class="form-control" id="history" name="search" placeholder="Search"
+                                    maxlength="100" autofocus>
 
                             </div>&nbsp;&nbsp;
-                           <button id="btnClick" onclick="collectStaffName();"><span class="glyphicon glyphicon-search"></span></button> 
-                        </form>
-                        
+                            <span class="glyphicon glyphicon-search"></span>
+                       
+
+
                         </ul>
-                    </div>
-                </legend>
-                <div id="show"></div>
-                <div class="col-md-9">
+                        <br>
+                    </legend>
+                </div>
+
+                <br>
+
+
+                <div class="col-md-3  " id="image">
+                    <div id="NumberofArticles"> </div>  
+                    <!-- <input type="text" id="DateYear" required="required"> -->
+                    <input type="text" id="DateYear" name="year" placeholder="Year"  minlength="4" maxlength="4" required="required"> 
                     <br>
 
-                    <div class="container">
-
-
-
-                        <div class="col-md-6">
-                            <div class="showNameAj" id="showNameAj">
-
-                            </div>
-                            <a href="searchAllStaffs.htm">
-                            <button class="btn btn-info" type="submit" id="searchB">
-                                    Search All &nbsp;  &nbsp;   
-                                     <span class="glyphicon glyphicon-search"></span> </button></a>
-    
-
-                        </div>
-
-
-
-                      
-
-                    </div>
+                    <br>
+                    <div ></div>
+                    <button type="button" id="btn" value="submit" onclick="myFunction()" >View Report </button>
+                     <!-- + id=+tid+&name=+name+&lastname=+lastname+&year= -->
+                    <a href="reportStaffs.htm"></a>
+                    <!-- <button class="btn btn-info" type="submit" id="searchV" onclick="reportStaffs.htm"> -->
+                        <!-- View Report -->
+                        <!-- <span class="glyphicon glyphicon-share-alt"></span>
+                    </button> -->
+                </a>
+                    <br>
+                    <br>
 
                 </div>
 
-             
-               
+
+                <div class="col-md-8 " id="showresultStaff" style=background-color:#ffffff;>
+                    <br><br>
+                </div>
+
+                
+
             </div>
-
-            <br>
-
         </div>
+
     </div>
     </div>
     <br>
 
     </div>
-    
-    <script src="js/COCAcademicStaff.js"></script>
+<script src="js/resultStaff.js"></script>   
+
 </body>

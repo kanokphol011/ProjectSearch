@@ -1,38 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         
          <script>
-        
+  
          function collectJSON(){
          var xmlhttp = new XMLHttpRequest();
-         var auth = document.getElementById("author").value;
-         var checkBox = document.getElementById("myCheck");
-         var url;
-
-         if (checkBox.checked == true){
-           url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+auth+')%20AFFIL(College%20of%20Computing)&apiKey=185547eee67ed06e5e817a0f227d23fe';
-
-         }else{
-           url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+auth+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
-
-         }
-         console.log(url);
-
+         var all = document.getElementById("all").value;
+         var url ='';
+         console.log(all,checkBox.checked);
+        // var url = 'https://api.elsevier.com/content/search/scopus?query=AUTHOR-NAME('+auth+')&apiKey=c1012bdfeae663cbf772fda975c25fd3';
+         
+        if (!all === false && !checkBox.checked === false){
+         url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+all+')%20AFFIL(Prince%20of%20Songkla%20University)&apiKey=185547eee67ed06e5e817a0f227d23fe'; 
+        console.log(1);      
+      }
+        if(!all === false && !checkBox.checked === true){
+            url = 'https://api.elsevier.com/content/search/scopus?query=ALL('+all+')&apiKey=185547eee67ed06e5e817a0f227d23fe';
+            console.log(2);        
+        }
+         if(!all === true && !checkBox.checked === false){
+            url = 'https://api.elsevier.com/content/search/scopus?query=AFFIL(Prince%20of%20Songkla%20University)&apiKey=185547eee67ed06e5e817a0f227d23fe';
+            console.log(3);     
+        }
+         console.log(url)
          xmlhttp.open("GET", url, false);
          xmlhttp.send();
          if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
          {
               var result = xmlhttp.responseText;
               var jsResult = JSON.parse(result);
-              console.log(jsResult);
+              
               var c = jsResult["search-results"]["entry"].length;
               var r = "";
               for(i =0;i<c;i++){
-                   r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>";
+                var meet =jsResult["search-results"]["entry"][i]["link"][2]["@href"];
+                   r += i+1 +". <b><a href="+meet+">"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</a></b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>";
               }
              
              
@@ -40,77 +49,117 @@
          }
         }
          </script>
-         <title>Home</title>
-         </head>
-         <body>
-            
-            <nav class="navbar navbar-default navbar-static-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                            <span class="sr-only">Menu</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand">COC Pubilcation Report System</a>
-                    </div>
+    <title>Home</title>
+
+</head>
+
+<body background="">
+    <div id="app">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Menu</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand">COC Publication Report System</a>
+                </div>
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <ul class="nav navbar-nav">&nbsp;</ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="logout.htm" id="btn">Logout</a>
+                        </li>
+                        <li>
+                            <a href="home.htm" id="btn">Search</a>
+                        </li>
+                        <li>
+                            <a href="COCAcademicStaff.htm" id="btn">COC Academic Staff</a>
+                        </li>
+                        <li>
+                            <a href="contact.htm" id="btn">Contact</a>
+                        </li>
+                        <li>
+                            <a>User</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+        <br>
+        <div class="container" style=background-color:#009999;>
+            <div class="navbar-header">
+                <h1 style=color:#f4f8f8;>Search</h1>
+
+            </div>
+
+        </div>
+        <br>
+        <div class="container">
+            <div class="row" style=background-color:#ccccb3;>
+                <legend>
                     <div class="collapse navbar-collapse" id="app-navbar-collapse">
                         <ul class="nav navbar-nav">&nbsp;</ul>
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-left">
                             <li>
-                                <a href="logout.htm" id="btn">Logout</a>
+                                <a href="home.htm" id="btn">All</a>
                             </li>
                             <li>
-                                <a href="home.htm" id="btn">Search</a>
+                                <a href="authors.htm" id="btn">Authors</a>
                             </li>
                             <li>
-                                <a href="COCAcademicStaff.htm" id="btn">COC Academic Staff</a>
+                                <a href="advanced.htm" id="btn">Advanced</a>
                             </li>
-                            <li>
-                                <a href="contact.htm" id="btn">Contact</a>
-                            </li>
-                            <li>
-                                <a>User</a>
-                            </li>
+
                         </ul>
                     </div>
-                </div>
-    
-            </nav>
-            <div class="container">
-                <div class="row" style=background-color:#ccccb3;>
-                    <legend>
-                        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-           
-                     <ul class="nav navbar-nav">&nbsp;</ul>
-                            <ul class="nav navbar-nav navbar-left">
-                                <li>
-                                    <a href="home.htm" id="btn">All</a>
-                                </li>
-                                <li>
-                                    <a href="authors.htm" id="btn">Authors</a>
-                                </li>
-                                <li>
-                                    <a href="advanced.htm" id="btn">Advanced</a>
-                                </li>
-                              
-                            </ul>
+                </legend>
+
+                <div class="col-md-9">
+                    <br>
+
+                    <div class="container">
+                        <div class="form-group">
+
+                            <label for="name">Seach </label>
+                            <input type="text" class="form-control col-md-offset-5" id="all" name="all" required="required"><br>
+                            
+                            <div class="col-md-4">
+                                <input type="checkbox" name="checkBox" id="checkBox" 
+                                    checked="checked">Affiliation: Prince of Songkla University
+                            </div>
                         </div>
-                    </legend>
 
-                    <div class="col-md-9">
-                        <br>
-    
-                        <div class="container">
-              <label for="name">Search: </label>
-              <input type="text" id="author" name="author" required="required"><br>
-              <input type="checkbox" name="myCheck"  id="myCheck">Affiliation: College of Computing
-             <br><button id="btnClick" onclick="collectJSON();">Search</button>
-             <div id="show"></div>
-            
-              </div></div>
 
-    
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 col-md-offset-12">
+                            <br><button id="btnClick" onclick="collectJSON();">Search</button>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div id="show"></div>
+
+                </div>
+
+                <br>
+
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+
+    </div>
+    </div>
+    </div>
+    <br>
+
+    </div>
+
 </body>
-</html>
