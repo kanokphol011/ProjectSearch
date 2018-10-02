@@ -56,13 +56,6 @@ $(function(){
 
         issuse = +ResultStaff ["search-results"]["entry"][i]["prism:issueIdentifier"];
          
-           if(!issuse=== issuse|| 0){
-
-            total="<h5>Number of Articles: None </h5>";
-        }
-           else{
-            total = "<h5>Number of Articles : "+parseInt(issuse)+"</h5>"; 
-           }
          
            meet =ResultStaff ["search-results"]["entry"][i]["link"][2]["@href"];
           
@@ -77,8 +70,5 @@ $(function(){
     }
 })
 
-$(function(){
 
-
-})
 

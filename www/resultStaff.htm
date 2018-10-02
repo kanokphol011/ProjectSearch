@@ -18,7 +18,6 @@
 </head>
 
 <body background="">
-    <div class="loader"></div>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -90,13 +89,24 @@
 
 
                 <div class="col-md-3  " id="image">
-                    <div id="NumberofArticles"> </div>  
                     <!-- <input type="text" id="DateYear" required="required"> -->
-                    <input type="text" id="DateYear" name="year" placeholder="Year"  minlength="4" maxlength="4" required="required"> 
+                    <span>
+                        <label for="year">year</label>
+                        <select class="yearselect">
+                        <script>
+                            var myDate = new Date();
+                            var yaer = myDate.getFullYear();
+                            for(var i =2000;i<=yaer ;i++){
+                                document.write('<option value="'+i+'">'+i+'</option>');
+                            }
+                        </script>
+                        <div class="col-md-3 "></div>
+                    </select>
+                    <!-- <input type="text" id="DateYear" name="year" placeholder="Year"  minlength="4" maxlength="4" required="required">  -->
                     <br>
 
                     <br>
-                    <div ></div>
+                 
                     <button type="button" id="btn" value="submit" onclick="myFunction()" >View Report </button>
                      <!-- + id=+tid+&name=+name+&lastname=+lastname+&year= -->
                     <a href="reportStaffs.htm"></a>
@@ -126,5 +136,6 @@
 
     </div>
 <script src="js/resultStaff.js"></script>   
+
 
 </body>
