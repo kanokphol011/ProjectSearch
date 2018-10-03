@@ -60,7 +60,7 @@ $(function(){
            meet =ResultStaff ["search-results"]["entry"][i]["link"][2]["@href"];
           
             r += "<h5 id=Name>"+r[i]+"</h5></br>";
-            you += i+1 +". <b><a href="+meet+">"+ ResultStaff ["search-results"]["entry"][i]["dc:title"] + "</a></b>,<i> "+ResultStaff["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+ResultStaff["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>"+ "<p> Number of Citations:"+ ResultStaff["search-results"]["entry"][i]["citedby-count"]+"</p><br><br>";    
+            you += i+1 +". <b><a href="+meet+">"+ ResultStaff ["search-results"]["entry"][i]["dc:title"] + "</a></b>,<i> "+ResultStaff["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+ResultStaff["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>"+ "<p> Number of Citations:"+ ResultStaff["search-results"]["entry"][i]["citedby-count"]+"</p><br>";    
             }
        //  document.getElementById("image").innerHTML = r+you;
         // document.getElementById("NumberofArticles").innerHTML = total;

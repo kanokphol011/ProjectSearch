@@ -2,7 +2,8 @@ var xmlhttp = new XMLHttpRequest();
 var urlSearchParams = URL.searchParams;
 let params = (new URL(document.location)).searchParams;
 let tid = params.get("id");
-// console.log(DateFrom);
+let options = {};
+
 var url='';
 var name,lastname,meet,issuse,total,to,you;
 $(function(){
@@ -67,15 +68,20 @@ $(function(){
 
 
 function myFunction() {
-    // var DateFrom = document.getElementById("DateYear").value;
+ var DateFrom = document.getElementById("yearselect").value;
+ var DateTo = document.getElementById("yearselectto").value;
 
 
     // $("#btn").click( function() {
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
-        // console.log(DateFrom);
-     //   var url = "reportStaffs.htm?id="+tid+"&name="+name+"&lastname="+lastname+"&year="+html;
-      // window.location.assign(url);
+        //console.log(DateFrom)
+        
+       var url = "reportStaffs.htm?id="+tid+"&name="+name+"&lastname="+lastname+"&year="+DateFrom+"&to="+DateTo;
+     // console.log(selector);
+
+
+        window.location.assign(url);
     // });
 
 }

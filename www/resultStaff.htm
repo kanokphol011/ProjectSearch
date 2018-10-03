@@ -4,15 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <!-- jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Result</title>
 
 </head>
@@ -90,31 +84,61 @@
 
                 <div class="col-md-3  " id="image">
                     <!-- <input type="text" id="DateYear" required="required"> -->
-                    <span>
+                    
+                          
                         <label for="year">year</label>
-                        <select class="yearselect">
+                        <select class="yearselect" id="yearselect">
                         <script>
+                           
+                            var yearSelect=document.getElementById("yearselect");
                             var myDate = new Date();
-                            var yaer = myDate.getFullYear();
-                            for(var i =2000;i<=yaer ;i++){
-                                document.write('<option value="'+i+'">'+i+'</option>');
-                            }
+                            var year = myDate.getFullYear();
+                            for(var j =2005;j<=year ;j++){
+                               // yearselect.options[y]=new Option(thisyear, thisyear);
+
+                               var option = document.createElement('option');
+                               option.value = j;     
+                             //  option.appendChild(document.createTextNode(j));
+                               option.textContent = j;
+                               yearSelect.appendChild(option);
+                           // var list ='<option value="'+j+'">'+j+'</option>'; 
+                            //  document.write(list); 
+                            
+                        }
                         </script>
-                        <div class="col-md-3 "></div>
+                       
                     </select>
-                    <!-- <input type="text" id="DateYear" name="year" placeholder="Year"  minlength="4" maxlength="4" required="required">  -->
+                    <h6>to</h6>
+                    <select class="yearselectto" id="yearselectto">
+                            <script>
+                               
+                                var yearSelectto=document.getElementById("yearselectto");
+                                var myYear = new Date();
+                                var years = myYear.getFullYear();
+                                for(var k =2005;k<=years ;k++){
+    
+                                   var option = document.createElement('option');
+                                   //option.value = k;     
+                                   // option.appendChild(document.createTextNode(j));
+                                   option.textContent = k;
+                                   yearSelectto.appendChild(option);
+                               // var list ='<option value="'+j+'">'+j+'</option>'; 
+                                //  document.write(list); 
+                                
+                            }
+                            </script>
+                           
+                        </select>
+                    
+              <!-- <input type="text" id="DateYear" name="year" placeholder="Year"  minlength="4" maxlength="4" required="required">  -->
                     <br>
 
                     <br>
                  
-                    <button type="button" id="btn" value="submit" onclick="myFunction()" >View Report </button>
-                     <!-- + id=+tid+&name=+name+&lastname=+lastname+&year= -->
-                    <a href="reportStaffs.htm"></a>
-                    <!-- <button class="btn btn-info" type="submit" id="searchV" onclick="reportStaffs.htm"> -->
-                        <!-- View Report -->
-                        <!-- <span class="glyphicon glyphicon-share-alt"></span>
-                    </button> -->
-                </a>
+                    <button type="button" id="btn" value="submit" onclick="myFunction()" >View Report</button>
+                    <!-- <a href="reportStaffs.htm"></a> -->
+                  
+               
                     <br>
                     <br>
 
