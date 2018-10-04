@@ -10,15 +10,12 @@
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>COC Academic Staff</title>
 
 </head>
 
 <body background="">
-   
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -76,52 +73,81 @@
                     </ul>
                     <br>
                     <a href="reportStaffs.htm">
-                    <button class="btn btn-info" type="submit" id="searchV">
-                        View Report All
-                        <span class="glyphicon glyphicon-share-alt"></span>
-                    </button></a>
+                        <button class="btn btn-info" type="submit" id="searchV">
+                            View Report All
+                            <span class="glyphicon glyphicon-share-alt"></span>
+                        </button></a>
                     </ul>
                 </div><br><br>
 
 
 
-
-                <div class="col-md-3  " id="image">
-
-
-                    <!-- <div id="Name"></div> -->
-                    <h5 id="NumberofArticles"> Number of Articles : 586</h5>
-                    <div class="col-md-7">
-                        <div id="NumberofArticles"> </div>                 
-                    <input type="year" id="DateFrom" name="year" placeholder="Year"  minlength="4" maxlength="4" required="Date"> <br>
-  
+                <div class="container" id="show">
+                    <div class="col-md-3  " id="image">
+                        <div id="Name"></div>
+                        <div class="col-md-7">
+                            <label for="year">year</label>
+                            <select class="yearselect" id="yearselect">
+                                <script>
+                                    var yearSelect=document.getElementById("yearselect");
+                                var myDate = new Date();
+                                var year = myDate.getFullYear();
+                                for(var j =2005;j<=year ;j++){
+                                var option = document.createElement('option');
+                                   option.value = j;     
+                                      option.textContent = j;
+                                   yearSelect.appendChild(option);                           
+                            }
+                        </script>
+                            </select>
+                            <h6>to</h6>
+                            <select class="yearselectto" id="yearselectto">
+                                <script>
+                                    var yearSelectto=document.getElementById("yearselectto");
+                                        var myYear = new Date();
+                                        var years = myYear.getFullYear();
+                                        for(var k =2005;k<=years ;k++){           
+                                           var option = document.createElement('option');
+                                           option.textContent = k;
+                                           yearSelectto.appendChild(option);     
+                                    }
+                                    </script>
+                            </select>
+                        </div>
+                        <button class="btn btn-info" type="submit" id="searchV" value="submit" onclick="myFunction()">
+                            View Report
+                            <span class="glyphicon glyphicon-share-alt"></span> </button>
                     </div>
-   
-
-                    <br>
-                    <a href="report.htm">
-                    <button class="btn btn-info" type="submit" id="searchV">
-                        View Report
-                        <span class="glyphicon glyphicon-share-alt"></span>
-                    </button></a>
-                    <br>
-                    <br>
-
-                </div>
-
-                <div class="col-md-5 " id="showresult" style=background-color:#ffffff;>
-                    <br><br>
+                    <div class="container">
+                            <div class="col-md-12 " id="showresult" style=background-color:#ffffff;>
+                                <div class="col-md-3" id="name" style="border-style: solid;border-width: 5px;">
+                                    <!-- name -->
+                                    <h5>name</h5>
+                                    <div class="col-md-2" id="yearFrom" style="border-style: solid;border-width: 3px;" >
+                                        <h5>yearFrom</h5>
+                                    </div>
+                                    
+                                    <div class="col-md-offset-4" id="yearTo" style="border-style: solid;border-width: 3px;" >
+                                            <h5>yearTo</h5>
+                                        </div>
+                                </div>
+                                <div class="col-md-offset-4" id="data" style="border-style: solid;border-width: 5px;">
+                                    <!-- data -->
+                                    <h5>data</h5>
+                                </div>
+                            </div>
+                    </div>
+                    
+                    
                 </div>
 
             </div>
         </div>
+    </div>
 
+    <br>
 
-            </div>
-
-            <br>
-
-        </div>
+    </div>
     </div>
     </div>
     <br>
