@@ -134,29 +134,38 @@
                     <br>
 
                     <div class="container">
-                        <div class="form-group">
+                        <div class="form-row">
 
-                            <label for="name">Name: </label>
-                            <input type="text" id="Nauthor" name="Nauthor" required="required"><br>
-                            <label for="name">Lastname: </label>
-                            <input type="text" id="Lauthor" name="Lauthor" required="required"><br>
                             <div class="col-md-3">
-
-                                <input type="checkbox" name="checkBox" id="checkBox" 
-                                    checked="checked">Affiliation: Prince of Songkla University
+                                <input class="form-control" type="text" id="Nauthor" name="Nauthor" placeholder="Authors name"
+                                    required="required">
                             </div>
+                            <div class="col-md-3">
+                                <input class="form-control" type="text" id="Lauthor" name="Lauthor" placeholder="Authors Lastname"
+                                    required="required">
+                            </div>
+
                         </div>
 
 
                     </div>
-
+                    <div class="form-group">
+                        <div class="col-md-5">
+                            &nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="checkBox" id="checkBox" checked="checked">Affiliation:
+                            Prince of Songkla University
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-md-2 col-md-offset-12">
                             <br><button id="btnClick" onclick="collectJSON();">Search</button>
-
+                            <br>
                         </div>
                     </div>
-                    <div id="show"></div>
+
+                    <div id="show">
+
+                    </div>
 
                 </div>
 
