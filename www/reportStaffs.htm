@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Report</title>
 
@@ -50,7 +51,7 @@
         </nav>
         <div class="container" style=background-color:#009999;>
             <div class="navbar-header">
-                <h1 style=color:#f4f8f8;>Search</h1>
+                <h1 style=color:#f4f8f8;>Report</h1>
 
             </div>
 
@@ -62,11 +63,11 @@
                     <legend>
                         <ul class="nav navbar-nav">&nbsp;</ul>
                         <ul class="nav navbar-nav navbar-left"></ul>
-                        <div class="col-md-9">
-                            <h3 id="btn">Report All</h3>
+                        <div class="col-md-12">
+                            <h3 id="namestaff">Report All</h3>
                         </div>
 
-                        <button class="btn btn-info" onclick="javascript:alert('Export file')" id="searchV">
+                        <button class="btn btn-info" onclick='download_csv()'>
 
                             &nbsp; &nbsp; Export &nbsp; &nbsp;
 
@@ -80,24 +81,24 @@
 
                 <div class="col-md-3  " id="image">
                     <h3 id="btn">Result</h3>
-                    <div id="NumberCitations"></div>
-                    <h5 id="NumberofArticles"> Number of Articles : 586</h5>                                   
+                    <div id="NumberCitations"></div>                                  
                 </div>
 
                 <div class="col-md-5 " id="showC" style=background-color:#ffffff;>
                     <h4>Graph of Citations</h4>
                     <br>
-                    <div class="col-md-4 " id="showGraphofCitations">
+                    <canvas class="col-md-4 " id="showGraphofCitations">
 
-                    </div>
+                    </canvas>
                     <button class="btn btn-info" onclick="javascript:alert('Save file')" id="searchC"> Save </button>
                     <br>
                     <br>
                     <br>
                     <h4>Graph of Articles</h4>
                     <br>
-                    <div class="col-md-4 " id="showGraphofArticles">
-                    </div>
+                    <canvas class="col-md-4 " id="showGraphofArticles">
+                        
+                    </canvas>
                     <button class="btn btn-info" onclick="javascript:alert('Save file')" id="searchA">Save </button>
                     <br>
                     <br>
@@ -120,7 +121,7 @@
 
     </div>
     
-    <script src="js/reportStaffs.js"></script>
+    <script src="js/reportStaff.js"></script>
 
 
 </body>
