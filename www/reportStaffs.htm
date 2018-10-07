@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
     <title>Report</title>
 
 </head>
@@ -67,7 +69,7 @@
                             <h3 id="namestaff">Report All</h3>
                         </div>
 
-                        <button class="btn btn-info" onclick='download_csv()'>
+                        <button class="btn btn-info" onclick='downloadCSV({ filename: "stock-data.csv" });'>
 
                             &nbsp; &nbsp; Export &nbsp; &nbsp;
 
@@ -85,16 +87,16 @@
                 </div>
 
                 <div class="col-md-5 " id="showC" style=background-color:#ffffff;>
-                    <h4>Graph of Citations</h4>
+                    <h4>Graph of Articles</h4>
                     <br>
                     <canvas class="col-md-4 " id="showGraphofCitations">
 
                     </canvas>
-                    <button class="btn btn-info" onclick="javascript:alert('Save file')" id="searchC"> Save </button>
+                    <button class="btn btn-info"  id="saveA"> Save </button>
                     <br>
                     <br>
                     <br>
-                    <h4>Graph of Articles</h4>
+                    <h4>Graph of Type</h4>
                     <br>
                     <canvas class="col-md-4 " id="showGraphofArticles">
                         
@@ -103,11 +105,6 @@
                     <br>
                     <br>
                     <br>
-                    <h4>Academic staff</h4>
-                    <br>
-                    <div class="col-md-4 " id="showGraphofAcademicStaff">
-                    </div>
-                    <button class="btn btn-info" onclick="javascript:alert('Save file')" id="searchA"> Save</button>
                 </div>
 
             </div>

@@ -32,21 +32,21 @@ $(function () {
                 r += "  <div> <b>" + jsResult["staffcoc"][i]["position"] + "</b> <b> " + jsResult["staffcoc"][i]["staffName"] + "</b> <b>" + jsResult["staffcoc"][i]["staffLastName"] + "</b></div>";
                 var name = 'test'
                 var headname = '<div class="col-md-3" id="name"';
-                // var midname = '<h5>'+name+'</h5>' +
+                var midname = '<h5>'+name+'</h5>' +
                 
-                //     '<div class="col-md-3" id="yearFrom"' +
-                //     '<h5>From</h5>' +
-                //     '</div>' +
-                //     '<div class="col-md-1" id="yearFrom"' +
-                //     '<h5>to</h5>' +
-                //     '</div>' +
-                //     '<div class="col-md-3" id="yearTo"' +
-                //     '<h5>To</h5>' +
-                //     '</div>' +
-                //     '<div class="col-md-12" id="yearTo"' +
-                //     '<button class="btn btn-info" type="submit" id="searchV" value="submit" onclick="myFunction()">View Report' +
-                //     '<span class="glyphicon glyphicon-share-alt"></span> </button>' +
-                //     '</div>';
+                    '<div class="col-md-3" id="yearFrom"' +
+                    '<h5>From</h5>' +
+                    '</div>' +
+                    '<div class="col-md-1" id="yearFrom"' +
+                    '<h5>to</h5>' +
+                    '</div>' +
+                    '<div class="col-md-3" id="yearTo"' +
+                    '<h5>To</h5>' +
+                    '</div>' +
+                    '<div class="col-md-12" id="yearTo"' +
+                    '<button class="btn btn-info" type="submit" id="searchV" value="submit" onclick="myFunction()">View Report' +
+                    '<span class="glyphicon glyphicon-share-alt"></span> </button>' +
+                    '</div>';
 
 var midname = '<select class="yearselect" id="yearselect">'+yearSelect+'</select>';
 
@@ -69,7 +69,7 @@ var option = document.createElement('option');
                     var ResultStaff = JSON.parse(Result);
                     var b = ResultStaff["search-results"]["entry"].length;
                     for (var j = 0; j < b; j++) {
-                        //you += (j + 1) + ". <b>" + ResultStaff["search-results"]["entry"][j]["dc:title"] + "</b>,<i> " + ResultStaff["search-results"]["entry"][j]["prism:publicationName"] + "</i>, " + ResultStaff["search-results"]["entry"][j]["prism:coverDisplayDate"] + "</br>" + "<p> Number of Citations:" + ResultStaff["search-results"]["entry"][j]["citedby-count"] + "</p><br>";
+                        you += (j + 1) + ". <b>" + ResultStaff["search-results"]["entry"][j]["dc:title"] + "</b>,<i> " + ResultStaff["search-results"]["entry"][j]["prism:publicationName"] + "</i>, " + ResultStaff["search-results"]["entry"][j]["prism:coverDisplayDate"] + "</br>" + "<p> Number of Citations:" + ResultStaff["search-results"]["entry"][j]["citedby-count"] + "</p><br>";
                         var headdata = '<div class="col-md-offset-4" id="data"';
                         var middata = you
                         var footdata = '</div>';
@@ -81,24 +81,24 @@ var option = document.createElement('option');
             }
         }
 
-        // var head = '<div class="col-md-3" id="name"';
-        // var mid = '<h5>name</h5>' +
-        //     '<div class="col-md-3" id="yearFrom"' +
-        //     '<h5>From</h5>' +
-        //     '</div>' +
-        //     '<div class="col-md-1" id="yearFrom"' +
-        //     '<h5>to</h5>' +
-        //     '</div>' +
-        //     '<div class="col-md-3" id="yearTo"' +
-        //     '<h5>To</h5>' +
-        //     '</div>' +
-        //     '<div class="col-md-12" id="yearTo"' +
-        //     '<button class="btn btn-info" type="submit" id="searchV" value="submit" onclick="myFunction()">View Report' +
-        //     '<span class="glyphicon glyphicon-share-alt"></span> </button>' +
-        //     '</div>';
-        // var foot = '</div>';
-        // var html = head + mid + foot;
-        // $('#showresult').append(r);
+        var head = '<div class="col-md-3" id="name"';
+        var mid = '<h5>name</h5>' +
+            '<div class="col-md-3" id="yearFrom"' +
+            '<h5>From</h5>' +
+            '</div>' +
+            '<div class="col-md-1" id="yearFrom"' +
+            '<h5>to</h5>' +
+            '</div>' +
+            '<div class="col-md-3" id="yearTo"' +
+            '<h5>To</h5>' +
+            '</div>' +
+            '<div class="col-md-12" id="yearTo"' +
+            '<button class="btn btn-info" type="submit" id="searchV" value="submit" onclick="myFunction()">View Report' +
+            '<span class="glyphicon glyphicon-share-alt"></span> </button>' +
+            '</div>';
+        var foot = '</div>';
+        var html = head + mid + foot;
+        $('#showresult').append(r);
 
 
 

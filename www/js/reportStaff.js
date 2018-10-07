@@ -10,6 +10,9 @@ var maxCite, numJor, numPro;
 var numCitation = new Array;
 var artType = new Array;
 var stockData = new Array;
+var numYearB = new Array;
+
+
 $(function(){
     // is the string "id"
     
@@ -41,10 +44,13 @@ $(function(){
     }
 })
 
- $(function(){ 
+ $(function(){
+    for(l=0;l<=(yearto-yearfrom);l++){
+        numYearB[l] = 0;
+    }   
     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
-    url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+''+y;
+    url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+(yearto+1)+''+y;
 
     console.log(url);
     xmlhttp.open("GET", url, false);
@@ -55,33 +61,55 @@ $(function(){
         var jsResult = JSON.parse(result);
         numJor=0;
         numPro=0;
-        //console.log(jsResult);
+       
         var numCite = new Array;
         var datastaff = jsResult["search-results"]["entry"].length;
         for(i =0;i<datastaff;i++){
             // get citation
             issuse1 = +jsResult["search-results"]["entry"][i]["citedby-count"];
-            numCitation[i] = parseInt(issuse1);
-            if(i==0){
-                numCite[i] = parseInt(issuse1);
-                maxCite = numCite[i]; 
-            }else if(i>0 && i<datastaff){
-                numCite[i] = parseInt(issuse1)+numCite[i-1];
-                maxCite = numCite[i];
-            }
+                numCitation[i] = parseInt(issuse1);
+                //console.log(numCitation);
+                if(i==0){
+                    numCite[i] = parseInt(issuse1);
+                    maxCite = numCite[i]; 
+                }else if(i>0 && i<datastaff){
+                    numCite[i] = parseInt(issuse1)+numCite[i-1];
+                    maxCite = numCite[i];
+                }
+
+            // get  data in year
+            
+            issuseYear = jsResult["search-results"]["entry"][i]["prism:coverDate"]+'='+jsResult["search-results"]["entry"][i]["citedby-count"];
+                
+                var numYearC = new Array;
+                    for(k=0;k<=(yearto-yearfrom);k++){
+        
+                        if(k==0){
+                            numYearC[k] = yearfrom;
+                            if(issuseYear.includes(numYearC[k])){
+                                numYearB[k] = numYearB[k]+1;
+                                }
+                            // numYearB[k] = issuseYear.includes(numYearC[k]).length;
+                            // console.log(numYearB);
+                        }else{
+                            numYearC[k] = numYearC[k-1]+1;
+                            if(issuseYear.includes(numYearC[k])){
+                                numYearB[k] = numYearB[k]+1;
+                                }     
+                        }
+                    }
+               
+                   
+
             // get type
             issuse2 = jsResult["search-results"]["entry"][i]["prism:aggregationType"];
-            var ss = toString(issuse2);
-            //console.log(issuse2);
-            if(issuse2=='Conference Proceeding'){
-                numPro += 1;
-            }else if(issuse2=='Journal'){
-                numJor += 1;
-            }
+                var ss = toString(issuse2);
+                if(issuse2=='Conference Proceeding'){
+                    numPro += 1;
+                }else if(issuse2=='Journal'){
+                    numJor += 1;
+                }
             
-            //console.log('numPro :'+numPro);
-            //console.log('numJor :'+numJor);
-            //console.log(ss);
         }
 
         
@@ -90,7 +118,6 @@ $(function(){
         var text = "none" ;
         document.getElementById("showresult").innerHTML = text;
     }
-
     document.getElementById("NumberCitations").innerHTML = 'Number of Citation :'+maxCite;
 
  })
@@ -114,21 +141,21 @@ $(function(){
         data: {
             labels: numYear,
             datasets: [{
-                label: "My First dataset",
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: numCitation,
+                data: numYearB,
             }]
         },
     
         // Configuration options go here
         options: {}
     });
+    
  })
 
  $(function(){
     var ctx1 = document.getElementById('showGraphofArticles').getContext('2d');
-    var chart = new Chart(ctx1, {
+    var chart2 = new Chart(ctx1, {
         // The type of chart we want to create
         type: 'pie',
     
@@ -155,6 +182,10 @@ $(function(){
     });
  })
 
+ document.getElementById("saveA").addEventListener("click",function(){
+    chart.exportChart({format: "jpg"});
+}); 
+/*
  function exportToCsv(filename, rows) {
     var processRow = function (row) {
         var finalVal = '';
@@ -194,7 +225,14 @@ $(function(){
             document.body.removeChild(link);
         }
     }
-}
+}*/
+/*$(function(){
+    var button = document.getElementById('saveA');
+    button.addEventListener('click', function (chart) {
+    var dataURL = canvas.toDataURL('image/png');
+    button.href = dataURL;
+});
+})*/
 /*
 $(function(){
     
@@ -239,7 +277,7 @@ $(function(){
     hiddenElement.click();
 }
 */
-/*
+
  function convertArrayOfObjectsToCSV(args) {
     var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
@@ -299,7 +337,7 @@ function downloadCSV(args) {
     var data, filename, link;
 
     var csv = convertArrayOfObjectsToCSV({
-        data: stock
+        data: stockData
     });
     if (csv == null) return;
 
@@ -333,4 +371,3 @@ var stockDataa = [
         Price: "554.52"
     },
 ];
-*/
