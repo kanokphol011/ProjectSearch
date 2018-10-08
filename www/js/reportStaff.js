@@ -65,7 +65,7 @@ $(function(){
         var numCite = new Array;
         var datastaff = jsResult["search-results"]["entry"].length;
         for(i =0;i<datastaff;i++){
-            // get citation
+            // get จำนวนอ้างอิง
             issuse1 = +jsResult["search-results"]["entry"][i]["citedby-count"];
                 numCitation[i] = parseInt(issuse1);
                 //console.log(numCitation);
@@ -77,8 +77,8 @@ $(function(){
                     maxCite = numCite[i];
                 }
 
-            // get  data in year
-            
+
+            // get  จำนวนArticleในปีนั้น
             issuseYear = jsResult["search-results"]["entry"][i]["prism:coverDate"]+'='+jsResult["search-results"]["entry"][i]["citedby-count"];
                 
                 var numYearC = new Array;
@@ -89,8 +89,6 @@ $(function(){
                             if(issuseYear.includes(numYearC[k])){
                                 numYearB[k] = numYearB[k]+1;
                                 }
-                            // numYearB[k] = issuseYear.includes(numYearC[k]).length;
-                            // console.log(numYearB);
                         }else{
                             numYearC[k] = numYearC[k-1]+1;
                             if(issuseYear.includes(numYearC[k])){
@@ -101,7 +99,7 @@ $(function(){
                
                    
 
-            // get type
+            // get ประเภทของงานวิจัย(proceed,journal)
             issuse2 = jsResult["search-results"]["entry"][i]["prism:aggregationType"];
                 var ss = toString(issuse2);
                 if(issuse2=='Conference Proceeding'){
@@ -122,6 +120,7 @@ $(function(){
 
  })
 
+ //กราฟแสดงจำนวนArticle
  $(function(){
     var numYear = new Array;
     for(i=0;i<=(yearto-yearfrom);i++){
@@ -153,6 +152,7 @@ $(function(){
     
  })
 
+ //กราฟแสดงประเภทของงานวิจัย
  $(function(){
     var ctx1 = document.getElementById('showGraphofArticles').getContext('2d');
     var chart2 = new Chart(ctx1, {
