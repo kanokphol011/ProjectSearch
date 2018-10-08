@@ -292,8 +292,8 @@ $(function(){
     keys = Object.keys(data[0]);
 
     result = '';
-    result += keys.join(columnDelimiter);
-    result += lineDelimiter;
+    //result += keys.join(columnDelimiter);
+    //result += lineDelimiter;
 
     data.forEach(function(item) {
         ctr = 0;
@@ -304,9 +304,8 @@ $(function(){
             result += item[key];
             ctr++;
            
-        });
-        
-       // result += lineDelimiter;
+        });    
+        result += lineDelimiter;
         console.log(result);
     });
 
