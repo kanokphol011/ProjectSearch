@@ -298,15 +298,20 @@ $(function(){
     data.forEach(function(item) {
         ctr = 0;
         keys.forEach(function(key) {
-            if (ctr > 0) result += columnDelimiter;
+            if (ctr >= 0) 
+          //  result += columnDelimiter;
 
             result += item[key];
             ctr++;
+           
         });
-        result += lineDelimiter;
+        
+       // result += lineDelimiter;
+        console.log(result);
     });
 
     return result;
+    
 }
 
 function downloadCSV(args) {
@@ -339,6 +344,7 @@ function downloadCSV(args) {
     var csv = convertArrayOfObjectsToCSV({
         data: stockData
     });
+    
     if (csv == null) return;
 
     filename = args.filename || 'export.csv';
@@ -347,27 +353,27 @@ function downloadCSV(args) {
         csv = 'data:text/csv;charset=utf-8,' + csv;
     }
     data = encodeURI(csv);
-
+    
     link = document.createElement('a');
     link.setAttribute('href', data);
     link.setAttribute('download', filename);
     link.click();
 }
 
-var stockDataa = [
-    {
-        Symbol: "AAPL",
-        Company: "Apple Inc.",
-        Price: "132.54"
-    },
-    {
-        Symbol: "INTC",
-        Company: "Intel Corporation",
-        Price: "33.45"
-    },
-    {
-        Symbol: "GOOG",
-        Company: "Google Inc",
-        Price: "554.52"
-    },
-];
+// var stockDataa = [
+//     {
+//         Symbol: "AAPL",
+//         Company: "Apple Inc.",
+//         Price: "132.54"
+//     },
+//     {
+//         Symbol: "INTC",
+//         Company: "Intel Corporation",
+//         Price: "33.45"
+//     },
+//     {
+//         Symbol: "GOOG",
+//         Company: "Google Inc",
+//         Price: "554.52"
+//     },
+// ];
