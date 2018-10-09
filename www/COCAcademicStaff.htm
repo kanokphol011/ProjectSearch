@@ -4,18 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/index.css">
-    <title>Report</title>
+
+    <title>COC Academic Staff</title>
 
 </head>
 
 <body background="">
-
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -53,72 +51,75 @@
         </nav>
         <div class="container" style=background-color:#009999;>
             <div class="navbar-header">
-                <h1 style=color:#f4f8f8;>Report</h1>
+                <h1 style=color:#f4f8f8;>Search by COC Academic staff</h1>
 
             </div>
 
         </div>
         <br>
+      
+        <br>
         <div class="container">
             <div class="row" style=background-color:#ccccb3;>
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <legend>
+                <legend>
+                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
                         <ul class="nav navbar-nav">&nbsp;</ul>
                         <ul class="nav navbar-nav navbar-left"></ul>
-                        <div class="col-md-12">
-                            <h3 id="namestaff">Report All</h3>
+                        <ul class="col-md-9">
+                            <h3>List of COC academic staff</h3>
+                            
+                        </ul>
+                        <form id="searchForm" class="form-horizontal" action="" method="POST" role="form">
+                            <div class="form-group col-md-2">
+                                <input type="text" class="form-control" id="search" name="search" placeholder="Search" maxlength="100" autofocus>
+
+                            </div>&nbsp;&nbsp;
+                           <button id="btnClick" onclick="collectStaffName();"><span class="glyphicon glyphicon-search"></span></button> 
+                        </form>
+                        
+                        </ul>
+                    </div>
+                </legend>
+                <div id="show"></div>
+                <div class="col-md-9">
+                    <br>
+
+                    <div class="container">
+
+
+
+                        <div class="col-md-6">
+                            <div class="showNameAj" id="showNameAj">
+
+                            </div>
+                            <a href="searchAllStaffs.htm">
+                            <button class="btn btn-info" type="submit" id="searchB">
+                                    Search All &nbsp;  &nbsp;   
+                                     <span class="glyphicon glyphicon-search"></span> </button></a>
+    
+
                         </div>
 
-                        <button class="btn btn-info"  id='ExportA'>
 
-                            &nbsp; &nbsp; Export &nbsp; &nbsp;
 
-                        </button>
-                        <br>
+                      
 
-                        </ul>
-                        <br>
-                    </legend>
+                    </div>
+
                 </div>
 
-                <div class="col-md-3  " id="image">
-                    <h3 id="btn">Result</h3>
-                    <div id="NumberCitations"></div>                                  
-                </div>
-
-                <div class="col-md-5 " id="showC" style=background-color:#ffffff;>
-                    <h4>Graph of Articles</h4>
-                    <br>
-                    <canvas class="col-md-4 " id="showGraphofCitations">
-
-                    </canvas>
-                    <button class="btn btn-info"  id="saveA"> Save </button>
-                    <br>
-                    <br>
-                    <br>
-                    <h4>Graph of Type</h4>
-                    <br>
-                    <canvas class="col-md-4 " id="showGraphofArticles">
-                        
-                    </canvas>
-                    <button class="btn btn-info" onclick="javascript:alert('Save file')" id="searchA">Save </button>
-                    <br>
-                    <br>
-                    <br>
-                </div>
-
+             
+               
             </div>
 
+            <br>
+
         </div>
-
     </div>
-
-   
     </div>
+    <br>
 
     </div>
     
-    <script src="js/reportStaff.js"></script>
-
-
+    <script src="js/COCAcademicStaff.js"></script>
 </body>

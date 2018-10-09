@@ -4,21 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <!-- jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Result</title>
 
 </head>
 
 <body background="">
-    <div class="loader"></div>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -56,7 +49,7 @@
         </nav>
         <div class="container" style=background-color:#009999;>
             <div class="navbar-header">
-                <h1 style=color:#f4f8f8;>Search</h1>
+                <h1 style=color:#f4f8f8;>Search by COC Academic staff</h1>
 
             </div>
 
@@ -68,8 +61,8 @@
                     <legend>
                         <ul class="nav navbar-nav">&nbsp;</ul>
                         <ul class="nav navbar-nav navbar-left"></ul>
-                        <div class="col-md-9">
-                            <h3 id="btn">Name</h3>
+                        <div class="col-md-9" id="Name">
+                            
                         </div>
                         <form id="searchForm" class="form-horizontal" action="" method="POST" role="form">
                             <div class="form-group col-md-2">
@@ -78,7 +71,7 @@
 
                             </div>&nbsp;&nbsp;
                             <span class="glyphicon glyphicon-search"></span>
-                        </form>
+                       
 
 
                         </ul>
@@ -90,36 +83,69 @@
 
 
                 <div class="col-md-3  " id="image">
+                    <!-- <input type="text" id="DateYear" required="required"> -->
+                    
+                          
+                        <label for="year">year</label>
+                        <select class="yearselect" id="yearselect">
+                        <script>
+                           
+                            var yearSelect=document.getElementById("yearselect");
+                            var myDate = new Date();
+                            var year = myDate.getFullYear();
+                            for(var j =2005;j<=year ;j++){
+                               // yearselect.options[y]=new Option(thisyear, thisyear);
 
-                    <img src="photo/dan.jpg" width="100" height="100" alt="">
-
-                    <h5 id="NumberofCitations"> Number of Citations : 586117</h5>
-                    <h5 id="NumberofArticles"> Number of Articles : 586</h5>
-                    <div class="col-md-7">
-                        <input class="form-control" id="searchDateOne" name="searchDateOne" placeholder="Date"
-                            autofocus="" type="date">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
-                    <p>to</p>
+                               var option = document.createElement('option');
+                               option.value = j;     
+                             //  option.appendChild(document.createTextNode(j));
+                               option.textContent = j;
+                               yearSelect.appendChild(option);
+                           // var list ='<option value="'+j+'">'+j+'</option>'; 
+                            //  document.write(list); 
+                            
+                        }
+                        </script>
+                       
+                    </select>
+                    <h6>to</h6>
+                    <select class="yearselectto" id="yearselectto">
+                            <script>
+                               
+                                var yearSelectto=document.getElementById("yearselectto");
+                                var myYear = new Date();
+                                var years = myYear.getFullYear();
+                                for(var k =2005;k<=years ;k++){
+    
+                                   var option = document.createElement('option');
+                                   //option.value = k;     
+                                   // option.appendChild(document.createTextNode(j));
+                                   option.textContent = k;
+                                   yearSelectto.appendChild(option);
+                               // var list ='<option value="'+j+'">'+j+'</option>'; 
+                                //  document.write(list); 
+                                
+                            }
+                            </script>
+                           
+                        </select>
+                    
+              <!-- <input type="text" id="DateYear" name="year" placeholder="Year"  minlength="4" maxlength="4" required="required">  -->
+                    <br>
 
                     <br>
-                    <a href="report.htm">
-                    <button class="btn btn-info" type="submit" id="searchV">
-                        View Report
-                        <span class="glyphicon glyphicon-share-alt"></span>
-                    </button></a>
+                 
+                    <button class="btn btn-info" type="button" id="btn" value="submit" onclick="myFunction()" >View Report</button>
+                    <!-- <a href="reportStaffs.htm"></a> -->
+                  
+               
                     <br>
                     <br>
 
                 </div>
 
-                <div class="col-md-2">
-                    <br><br><br><br><br><br><br><br>
-                    <input class="form-control" id="searchDateOne" name="searchDateOne" placeholder="Date" autofocus=""
-                        type="date">
 
-                </div>
-                <div class="col-md-5 " id="showresult" style=background-color:#ffffff;>
+                <div class="col-md-8 " id="showresultStaff" style=background-color:#ffffff;>
                     <br><br>
                 </div>
 
@@ -133,6 +159,7 @@
     <br>
 
     </div>
-<script src="js/result.js"></script>   
+<script src="js/resultStaff.js"></script>   
+
 
 </body>
