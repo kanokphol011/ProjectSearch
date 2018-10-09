@@ -185,36 +185,8 @@ $(function(){
  document.getElementById("saveA").addEventListener("click",function(){
     chart.exportChart({format: "jpg"});
 }); 
-
-//ข้อมูล Array
-$(function(){
-    
-    var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
-    var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
-    url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+''+y;
-    console.log('get success');
-    xmlhttp.open("GET", url, false);
-    xmlhttp.send();
-    
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-
-        var result = xmlhttp.responseText;
-        var jsResult = JSON.parse(result);
-        var datastaff = jsResult["search-results"]["entry"].length;
-        //INPUT DATA IN ARRAY TO DOWNLOAD
-        for(i =0;i<datastaff;i++){
-            stockData[i] = name+' '+lastname+'","'+ jsResult["search-results"]["entry"][i]["dc:title"]+'","'+jsResult["search-results"]["entry"][i]["prism:aggregationType"]; 
-
-        }
-    }else {
-        var text = "none" ;
-        document.getElementById("showresult").innerHTML = text;
-    }
-    console.info(stockData);
-})
-
-// Export ข้อมูล เป็น CSV
-function exportToCsv(filename, rows) {
+/*
+ function exportToCsv(filename, rows) {
     var processRow = function (row) {
         var finalVal = '';
         for (var j = 0; j < row.length; j++) {
@@ -253,10 +225,150 @@ function exportToCsv(filename, rows) {
             document.body.removeChild(link);
         }
     }
+}*/
+/*$(function(){
+    var button = document.getElementById('saveA');
+    button.addEventListener('click', function (chart) {
+    var dataURL = canvas.toDataURL('image/png');
+    button.href = dataURL;
+});
+})*/
+/*
+$(function(){
+    
+    var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
+    var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
+    url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+''+y;
+    console.log('get success');
+    xmlhttp.open("GET", url, false);
+    xmlhttp.send();
+    
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+
+        var result = xmlhttp.responseText;
+        var jsResult = JSON.parse(result);
+        var datastaff = jsResult["search-results"]["entry"].length;
+        //INPUT DATA IN ARRAY TO DOWNLOAD
+        for(i =0;i<datastaff;i++){
+            stockData[i] = name+' '+lastname+'","'+ jsResult["search-results"]["entry"][i]["dc:title"]+'","'+jsResult["search-results"]["entry"][i]["prism:aggregationType"]; 
+
+        }
+    }else {
+        var text = "none" ;
+        document.getElementById("showresult").innerHTML = text;
+    }
+})
+/* 
+ function download_csv() {
+
+    console.log(stockData);
+
+    var csv = 'Name,Title,Type\n';
+    stockData.forEach(function(row) {
+            csv += row.join(',');
+            csv += "\n";
+    });
+ 
+    console.log(csv);
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'people.csv';
+    hiddenElement.click();
+}
+*/
+
+ function convertArrayOfObjectsToCSV(args) {
+    var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+    data = args.data || null;
+    if (data == null || !data.length) {
+        return null;
+    }
+
+    columnDelimiter = args.columnDelimiter || ',';
+    lineDelimiter = args.lineDelimiter || '\n';
+
+    keys = Object.keys(data[0]);
+
+    result = '';
+    result += keys.join(columnDelimiter);
+    result += lineDelimiter;
+
+    data.forEach(function(item) {
+        ctr = 0;
+        keys.forEach(function(key) {
+            if (ctr > 0) result += columnDelimiter;
+
+            result += item[key];
+            ctr++;
+        });
+        result += lineDelimiter;
+    });
+
+    return result;
 }
 
-var stockdataa = new Array;
-$(ExportA).click(function () {
-    stockdataa = stockData
-    exportToCsv('export.csv', stockdataa)
-});
+function downloadCSV(args) {
+
+    var stockData = new Array;
+    var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
+    var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
+    url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+''+y;
+    console.log('get success');
+    xmlhttp.open("GET", url, false);
+    xmlhttp.send();
+    
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+
+        var result = xmlhttp.responseText;
+        var jsResult = JSON.parse(result);
+        var datastaff = jsResult["search-results"]["entry"].length;
+        //INPUT DATA IN ARRAY TO DOWNLOAD
+        for(i =0;i<datastaff;i++){
+            stockData[i] = {fullname: name+' '+lastname, article: jsResult["search-results"]["entry"][i]["dc:title"], arttype: jsResult["search-results"]["entry"][i]["prism:aggregationType"]};
+            //stockData[i] = name+' '+lastname+'","'+ jsResult["search-results"]["entry"][i]["dc:title"]+'","'+jsResult["search-results"]["entry"][i]["prism:aggregationType"]; 
+            
+        }
+    }else {
+        var text = "none" ;
+        document.getElementById("showresult").innerHTML = text;
+    }
+    console.log(stockData);
+    var data, filename, link;
+
+    var csv = convertArrayOfObjectsToCSV({
+        data: stockData
+    });
+    if (csv == null) return;
+
+    filename = args.filename || 'export.csv';
+
+    if (!csv.match(/^data:text\/csv/i)) {
+        csv = 'data:text/csv;charset=utf-8,' + csv;
+    }
+    data = encodeURI(csv);
+
+    link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', filename);
+    link.click();
+}
+
+var stockDataa = [
+    {
+        Symbol: "AAPL",
+        Company: "Apple Inc.",
+        Price: "132.54"
+    },
+    {
+        Symbol: "INTC",
+        Company: "Intel Corporation",
+        Price: "33.45"
+    },
+    {
+        Symbol: "GOOG",
+        Company: "Google Inc",
+        Price: "554.52"
+    },
+];
