@@ -18,8 +18,9 @@
         var Nauth = document.getElementById("Nauthor").value;   
         var Keyword = document.getElementById("Keyword").value;
         var Exclude = document.getElementById("Exclude").value;
-        var DateFrom =document.getElementById("DateFrom").value;
-       
+        var DateFrom = document.getElementById("yearselect").value;
+        var DateTo = document.getElementById("yearselectto").value;
+
         var ApiKey = '&apiKey=185547eee67ed06e5e817a0f227d23fe';         
         
         var y = "";
@@ -77,13 +78,13 @@
                 console.log(10);
             }
         }
-        if(!DateFrom === false){
+        if(!DateFrom === false && !DateTo===false){
             if(!y=== true){
-                y+=x+'query=PUBYEAR%20='+DateFrom;
+                y+=x+'query=PUBYEAR%20>%20'+DateFrom+'AND%20PUBYEAR%20<%20'+DateTo;
                 console.log(11);
             } 
             else {
-                y+='&PUBYEAR%20='+DateFrom;       
+                y+='&PUBYEAR%20>%20'+DateFrom+'AND%20PUBYEAR%20<%20'+DateTo;       
                 console.log(12);
             }
         }
@@ -126,7 +127,7 @@
 
        }
         </script>
-    <title>test</title>
+    <title>advanced</title>
 
 </head>
 
@@ -200,19 +201,63 @@
 
                     <div class="container">
                         <div class="form-group">
-                            <!-- <label for="name">Title: </label> -->
+                            <label for="name">Title: </label>
                             <input type="text" id="TitleName" name="TitleName"placeholder="Title name"  required="required"><br><br>
-                            <!-- <label for="name">Name: </label> -->
+                            <label for="name">Name: </label>
                             <input type="text" id="Nauthor" name="Nauthor" placeholder="Authors name" required="required">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <!-- <label for="name">Lastname: </label> -->
+                            <label for="name">Lastname: </label>
                             <input type="text" id="Lauthor" name="Lauthor" placeholder="Authors Lastname" required="required"><br><br>
-                            <!-- <label for="name">Keyword: </label>  -->
+                            <label for="name">Keyword: </label> 
                             <input type="text" id="Keyword" name="Keyword" placeholder="Keyword" required="required"><br><br>
+                            <label for="name">Exclude: </label> 
                             <input type="text" id="Exclude" name="Exclude" placeholder="Exclude" required="required"><br><br>
-                            <input type="year" id="DateFrom" name="year" placeholder="Year"  minlength="1990"  required="Date"> <br>
+                            <label for="year">year</label>
+                            <select class="yearselect" id="yearselect">
+                                  
+                            <script>
+                               
+                                var yearSelect=document.getElementById("yearselect");
+                                var myDate = new Date();
+                                var year = myDate.getFullYear();
+                                for(var j =2005;j<=year ;j++){
+                                   // yearselect.options[y]=new Option(thisyear, thisyear);
+    
+                                   var option = document.createElement('option');
+                                   option.value = j;     
+                                 //  option.appendChild(document.createTextNode(j));
+                                   option.textContent = j;
+                                   yearSelect.appendChild(option);
+                               // var list ='<option value="'+j+'">'+j+'</option>'; 
+                                //  document.write(list); 
+                                
+                            }
+                            </script>
                            
-                            <div class="col-md-3">
+                        </select>
+                        to
+                        <select class="yearselectto" id="yearselectto">
+                                <script>
+                                   
+                                    var yearSelectto=document.getElementById("yearselectto");
+                                    var myYear = new Date();
+                                    var years = myYear.getFullYear();
+                                    for(var k =2005;k<=years ;k++){
+        
+                                       var option = document.createElement('option');
+                                       //option.value = k;     
+                                       // option.appendChild(document.createTextNode(j));
+                                       option.textContent = k;
+                                       yearSelectto.appendChild(option);
+                                   // var list ='<option value="'+j+'">'+j+'</option>'; 
+                                    //  document.write(list); 
+                                    
+                                }
+                                </script>
+                               
+                            </select>   
+                                   <br>       
+                            <div class="col-md-4">
 
                                 <input type="checkbox" name="checkBox" id="checkBox" 
                                     checked="checked">Affiliation: Prince of Songkla University
