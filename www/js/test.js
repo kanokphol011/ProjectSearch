@@ -41,16 +41,16 @@ $(function () {
             
                
                 var button ='<button class="btn btn-info" type="submit" id="searchV" value="submit" onclick="myFunction()">View Report'
-           + '<span class="glyphicon glyphicon-share-alt"></span></button>';
-                r += '<div class="col-md-offset-1 col-md-3" style=background-color:#ffffff;> <h6> <b>' + jsResult["staffcoc"][i]["position"] + '</b> <b> ' + jsResult["staffcoc"][i]["staffName"]
-                 + '</b> <b>' + jsResult["staffcoc"][i]["staffLastName"] + '</b></h6>'+[i]+'</div><br>';
+           + '<span class="glyphicon glyphicon-share-alt"></span></button><br>';
+           var ice= '<div class="col-sm-7 col-md-offset-1" style=background-color:#ffffff;>'+[i]+'</div>';
+                r += '<div class="col-sm-3 col-md-offset-1" style=background-color:#ffffff;> <h6> <b>' + jsResult["staffcoc"][i]["position"] + '</b> <b> ' + jsResult["staffcoc"][i]["staffName"]
+                 + '</b> <b>' + jsResult["staffcoc"][i]["staffLastName"] + '</b></h6>'+button+'</div><br>'+ice+'<br>';
                 
+               
                 }
 
-            // document.appendChild(toAdd);
-            var classes ='<div class="form-group" id="pop">';
-            var close = '</div>';
-            document.getElementById("shows").innerHTML = classes+r+close;
+         
+            document.getElementById("row").innerHTML = r+ice;
 
         }  
         })
