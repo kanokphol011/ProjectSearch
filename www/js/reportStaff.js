@@ -290,4 +290,3 @@ function downloadCSV(args) {
     link.setAttribute('download', filename);
     link.click();
 }
-
