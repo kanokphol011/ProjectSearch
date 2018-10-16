@@ -6,7 +6,7 @@ let name = params.get("name");
 let lastname = params.get("lastname");
 let yearfrom = parseInt(params.get("year")); 
 let yearto = parseInt(params.get("to"));
-var maxCite, numJor, numPro;
+var maxCite, numJor, numPro, numBook;
 var numCitation = new Array;
 var artType = new Array;
 var stockData = new Array;
@@ -61,6 +61,7 @@ $(function(){
         var jsResult = JSON.parse(result);
         numJor=0;
         numPro=0;
+        numBook=0;
        
         var numCite = new Array;
         var datastaff = jsResult["search-results"]["entry"].length;
@@ -106,6 +107,8 @@ $(function(){
                     numPro += 1;
                 }else if(issuse2=='Journal'){
                     numJor += 1;
+                }else if(issuse2=='Book Series'){
+                    numBook += 1;
                 }
             
         }
@@ -162,10 +165,11 @@ $(function(){
         // The data for our dataset
         data: {
             datasets: [{
-                data: [numJor, numPro],
+                data: [numJor, numPro , numBook],
                 backgroundColor: [
                     'rgba(255, 99, 105, 0.6)',
-                    'rgba(100, 59, 255, 0.6)'
+                    'rgba(100, 59, 255, 0.6)',
+                    'rgba(50, 150, 200, 0.6)'
                 ]
             }],
         
@@ -173,6 +177,7 @@ $(function(){
             labels: [
                 'Journal',
                 'Conference Proceeding',
+                'Book Series'
             ],
             
         },
@@ -182,102 +187,28 @@ $(function(){
     });
  })
 
- document.getElementById("saveA").addEventListener("click",function(){
-    chart.exportChart({format: "jpg"});
-}); 
-/*
- function exportToCsv(filename, rows) {
-    var processRow = function (row) {
-        var finalVal = '';
-        for (var j = 0; j < row.length; j++) {
-            var innerValue = row[j] === null ? '' : row[j].toString();
-            if (row[j] instanceof Date) {
-                innerValue = row[j].toLocaleString();
-            };
-            var result = innerValue.replace(/"/g, '""');
-            if (result.search(/("|,|\n)/g) >= 0)
-                result = '"' + result + '"';
-            if (j > 0)
-                finalVal += ',';
-            finalVal += result;
-        }
-        return finalVal + '\n';
-    };
 
-    var csvFile = '';
-    for (var i = 0; i < rows.length; i++) {
-        csvFile += processRow(rows[i]);
-    }
-
-    var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
-    if (navigator.msSaveBlob) { // IE 10+
-        navigator.msSaveBlob(blob, filename);
-    } else {
-        var link = document.createElement("a");
-        if (link.download !== undefined) { // feature detection
-            // Browsers that support HTML5 download attribute
-            var url = URL.createObjectURL(blob);
-            link.setAttribute("href", url);
-            link.setAttribute("download", filename);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    }
-}*/
-/*$(function(){
-    var button = document.getElementById('saveA');
-    button.addEventListener('click', function (chart) {
-    var dataURL = canvas.toDataURL('image/png');
-    button.href = dataURL;
-});
-})*/
-/*
-$(function(){
+// SAVE กราฟ1
+function saveArt() {
+    var url_base64 = document.getElementById("showGraphofCitations").toDataURL("image/png");
     
-    var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
-    var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
-    url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+''+y;
-    console.log('get success');
-    xmlhttp.open("GET", url, false);
-    xmlhttp.send();
-    
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+    link1.href = url_base64;
 
-        var result = xmlhttp.responseText;
-        var jsResult = JSON.parse(result);
-        var datastaff = jsResult["search-results"]["entry"].length;
-        //INPUT DATA IN ARRAY TO DOWNLOAD
-        for(i =0;i<datastaff;i++){
-            stockData[i] = name+' '+lastname+'","'+ jsResult["search-results"]["entry"][i]["dc:title"]+'","'+jsResult["search-results"]["entry"][i]["prism:aggregationType"]; 
+    var url = link1.href.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
 
-        }
-    }else {
-        var text = "none" ;
-        document.getElementById("showresult").innerHTML = text;
-    }
-})
-/* 
- function download_csv() {
-
-    console.log(stockData);
-
-    var csv = 'Name,Title,Type\n';
-    stockData.forEach(function(row) {
-            csv += row.join(',');
-            csv += "\n";
-    });
- 
-    console.log(csv);
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-    hiddenElement.target = '_blank';
-    hiddenElement.download = 'people.csv';
-    hiddenElement.click();
 }
-*/
 
+// SAVE กราฟ2
+function saveArtType() {
+    var url_base64 = document.getElementById("showGraphofArticles").toDataURL("image/png");
+    
+    link2.href = url_base64;
+
+    var url = link1.href.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+
+}
+
+//แปลงข้อมูลเป็นCSV
  function convertArrayOfObjectsToCSV(args) {
     var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
@@ -309,12 +240,13 @@ $(function(){
     return result;
 }
 
+// DOWNLOAD FILE
 function downloadCSV(args) {
 
     var stockData = new Array;
     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
-    url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+''+y;
+    url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+1+''+y;
     console.log('get success');
     xmlhttp.open("GET", url, false);
     xmlhttp.send();
@@ -324,17 +256,21 @@ function downloadCSV(args) {
         var result = xmlhttp.responseText;
         var jsResult = JSON.parse(result);
         var datastaff = jsResult["search-results"]["entry"].length;
-        //INPUT DATA IN ARRAY TO DOWNLOAD
+
+        //ข้อมูลใน Array ที่เตรียมไว้แปลงเป็น CSV
         for(i =0;i<datastaff;i++){
-            stockData[i] = {fullname: name+' '+lastname, article: jsResult["search-results"]["entry"][i]["dc:title"], arttype: jsResult["search-results"]["entry"][i]["prism:aggregationType"]};
-            //stockData[i] = name+' '+lastname+'","'+ jsResult["search-results"]["entry"][i]["dc:title"]+'","'+jsResult["search-results"]["entry"][i]["prism:aggregationType"]; 
-            
+            stockData[i] = {Name: name+' '+lastname, 
+                            Article: jsResult["search-results"]["entry"][i]["dc:title"],
+                            PublicationYear: jsResult["search-results"]["entry"][i]["prism:coverDate"], 
+                            ArticleType: jsResult["search-results"]["entry"][i]["prism:aggregationType"], 
+                            Citation: jsResult["search-results"]["entry"][i]["citedby-count"]
+                           };
         }
     }else {
         var text = "none" ;
         document.getElementById("showresult").innerHTML = text;
     }
-    console.log(stockData);
+    //console.log(stockData);
     var data, filename, link;
 
     var csv = convertArrayOfObjectsToCSV({
@@ -355,20 +291,3 @@ function downloadCSV(args) {
     link.click();
 }
 
-var stockDataa = [
-    {
-        Symbol: "AAPL",
-        Company: "Apple Inc.",
-        Price: "132.54"
-    },
-    {
-        Symbol: "INTC",
-        Company: "Intel Corporation",
-        Price: "33.45"
-    },
-    {
-        Symbol: "GOOG",
-        Company: "Google Inc",
-        Price: "554.52"
-    },
-];

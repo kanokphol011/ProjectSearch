@@ -69,34 +69,34 @@ $(function () {
 
             // for (var j = 0; j < b; j++) {
             //     if(ResultStaff["search-results"]["entry"][j]["dc:title"] != null){
-            yearSelect[i] = document.getElementById("yearselect" + i);
+            // yearSelect[i] = document.getElementById("yearselect" + i);
             var myDate = new Date();
             var year = myDate.getFullYear();
             for (var l = 2005; l <= year; l++) {
-
                 // yearselect.options[y]=new Option(thisyear, thisyear);
-                option1 = document.createElement('option');
-                option1.value = l;
+                // option1 = document.createElement('option');
+                // option1.value = l;
                 //  option.appendChild(document.createTextNode(j));
-                option1.textContent = l;
-                yearSelect[i].appendChild(option1);
-                console.log(yearSelect[i] + i + "------------------------------------");
+                // option1.textContent = l;
+                // yearSelect[i].appendChild(option1);
+                // console.log(yearSelect[i] + i + "------------------------------------");
                 // var list ='<option value="'+j+'">'+j+'</option>'; 
                 //  document.write(list); 
+                $(".yearselect").append("<option>"+l+"</option>");
             }
-            yearSelectto[i] = document.getElementById("yearselectto" + i);
-            myYear = new Date();
-            years = myYear.getFullYear();
-            for (var k = 2005; k <= years; k++) {
-                option2 = document.createElement('option');
+            // yearSelectto[i] = document.getElementById("yearselectto" + i);
+           
+            for (var k = 2005; k <= year; k++) {
+                // option2 = document.createElement('option');
                 //option.value = k;     
                 // option.appendChild(document.createTextNode(j));
-                option2.textContent = k;
-                yearSelectto[i].appendChild(option2);
+                // option2.textContent = k;
+                // yearSelectto[i].appendChild(option2);
                 // var list ='<option value="'+j+'">'+j+'</option>'; 
                 //  document.write(list); 
-                console.log(yearSelectto[i] + i + "++++++++++++++++++++++++++++++++++++++");
-            }
+                // console.log(yearSelectto[i] + i + "++++++++++++++++++++++++++++++++++++++");
+           
+                $(".yearselectto").append("<option>"+k+"</option>");            }
             //     }
             // }
 
