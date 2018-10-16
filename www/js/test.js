@@ -53,10 +53,10 @@ $(function () {
                 var b = ResultStaff["search-results"]["entry"].length;
                 for (var j = 0; j < b; j++) {
                     if(j==0){
-                        r = '<div class="col-sm-6">'+'<h6> <b>.' + jsResult["staffcoc"][i]["position"] + '</b> <b> ' + jsResult["staffcoc"][i]["staffName"] +
+                        r = '<div class="col-sm-5">'+'<h6> <b>' + jsResult["staffcoc"][i]["position"] + '</b> <b> ' + jsResult["staffcoc"][i]["staffName"] +
                         '</b> <b>' + jsResult["staffcoc"][i]["staffLastName"] + '</b></h6>' + button+'<select class="yearselect" id="yearselect'+i+'"></select><select class="yearselectto" id="yearselectto'+i+'"></select>'+'</div>';
                     }else{
-                        r = '<div class="col-sm-6"></div>';
+                        r = '<div class="col-sm-5"></div>';
                     }
                     you = '<div class="col-sm-6">'+(j + 1) + ".<b>" + ResultStaff["search-results"]["entry"][j]["dc:title"] + "</b>,<i> " + ResultStaff["search-results"]["entry"][j]["prism:publicationName"] + "</i>, " + ResultStaff["search-results"]["entry"][j]["prism:coverDisplayDate"] + "</br>" + "<p> Number of Citations:" + ResultStaff["search-results"]["entry"][j]["citedby-count"] + "</p><br>"+'</div>';
                     console.log(ResultStaff["search-results"]["entry"][j]["dc:title"]);
