@@ -48,7 +48,7 @@ $(function () {
                 for (var j = 0; j < b; j++) {
                     if (j == 0) {
                         r = '<div class="col-sm-5">' + '<h6> <b>' + jsResult["staffcoc"][i]["position"] + '</b> <b> ' + jsResult["staffcoc"][i]["staffName"] +
-                            '</b> <b>' + jsResult["staffcoc"][i]["staffLastName"] + '</b></h6>' +'<select class="yearselect" id="yearselect' + i + '"></select><select class="yearselectto" id="yearselectto' + i + '"></select>'+'<br>' + button + '</div>';
+                            '</b> <b>' + jsResult["staffcoc"][i]["staffLastName"] + '</b></h6>' + '<select class="yearselect" id="yearselect' + i + '"></select><select class="yearselectto" id="yearselectto' + i + '"></select>' + '<br>' + button + '</div>';
                     } else {
                         r = '<div class="col-sm-5"></div>';
                     }
@@ -82,10 +82,10 @@ $(function () {
                 // console.log(yearSelect[i] + i + "------------------------------------");
                 // var list ='<option value="'+j+'">'+j+'</option>'; 
                 //  document.write(list); 
-                $(".yearselect").append("<option>"+l+"</option>");
+                $(".yearselect").append("<option>" + l + "</option>");
             }
             // yearSelectto[i] = document.getElementById("yearselectto" + i);
-           
+
             for (var k = 2005; k <= year; k++) {
                 // option2 = document.createElement('option');
                 //option.value = k;     
@@ -95,57 +95,24 @@ $(function () {
                 // var list ='<option value="'+j+'">'+j+'</option>'; 
                 //  document.write(list); 
                 // console.log(yearSelectto[i] + i + "++++++++++++++++++++++++++++++++++++++");
-           
-                $(".yearselectto").append("<option>"+k+"</option>");            }
+
+                $(".yearselectto").append("<option>" + k + "</option>");
+            }
             //     }
             // }
 
+
+                
+            }
+            $('#pagination-container').pagination({
+                dataSource: [1, 2, 3, 4, 5, 6, 7,8],
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    var html = template(data);
+                    dataContainer.html(html);
+                }
+            })
+
         }
-        
-        $('#pagination-demo').twbsPagination({
-            totalPages: 15,
-            // the current page that show on start
-            startPage: 1,
-            
-            // maximum visible pages
-            visiblePages: 15,
-            
-            initiateStartPageClick: true,
-            
-            // template for pagination links
-            href: false,
-            
-            // variable name in href template for page number
-            hrefVariable: '{{number}}',
-            
-            // Text labels
-            first: 'First',
-            prev: 'Previous',
-            next: 'Next',
-            last: 'Last',
-            
-            // carousel-style pagination
-            loop: false,
-            
-            // callback function
-            onPageClick: function (event, page) {
-                $('.page-active').removeClass('page-active');
-              $('#page'+page).addClass('page-active');
-            },
-            
-            // pagination Classes
-            paginationClass: 'pagination',
-            nextClass: 'next',
-            prevClass: 'prev',
-            lastClass: 'last',
-            firstClass: 'first',
-            pageClass: 'page',
-            activeClass: 'active',
-            disabledClass: 'disabled'
-            
-            });
 
-    }
-    
-
-})
+    })
