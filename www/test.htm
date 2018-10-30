@@ -13,6 +13,11 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" rel="stylesheet" type="text/css" href="css/home.css">
     <link rel="stylesheet" rel="stylesheet" type="text/css" href="css/test.css">
+    <link rel="stylesheet" rel="stylesheet" type="text/css" href="css/pagination.css">
+    <script src="js/pagination.min.js"></script>
+    <script src="js/pagination.js"></script>
+
+
 
 
     <title>Document</title>
@@ -43,7 +48,7 @@
                 </ul>
             </div>
         </nav>
-        <br>
+      
         <div class="container" style=background-color:#009999;>
             <div class="navbar-header">
                 <h1 style=color:#f4f8f8;>Search by COC Academic staff</h1>
@@ -64,6 +69,36 @@
 
                     </ul>
                     <br>
+                    <select name="" id="showName" disabled="disabled">
+                        <script>
+                            $(function(){
+                            var showName=document.getElementById("showName");
+                       
+                            var xmlhttps = new XMLHttpRequest();
+
+                            var urls ='https://staffcoc.000webhostapp.com/db.json';
+                            xmlhttps.open("GET", urls, false);
+                            xmlhttps.send();
+                            if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                            {
+                             var result = xmlhttp.responseText;
+                                var jsResult = JSON.parse(result);
+                                
+                                var pop = jsResult["staffcoc"].length;
+                               var b='';
+                                var pass ="";
+                                for(i =0;i<pop;i++){
+                                    var option = document.createElement('option');
+                                   // b += jsResult["staffcoc"][i]["position"]+jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
+                                    option.value = i;     
+                                    option.textContent = jsResult["staffcoc"][i]["position"]+jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
+                                    console.log(option.textContent);
+                                    showName.appendChild(option);
+                                }
+                            }
+                        })
+                        </script>
+                    </select>
                     <a href="reportStaffs.htm">
                         <button class="btn btn-info" type="submit" id="searchV">
                             View Report All
@@ -73,18 +108,18 @@
                 </div>
                 <div class="container">
                     <!-- <div class="row" id="row"> -->
-                                <div class="" id="name"> </div>
-                                <!-- <div class="" id="data"></div>                     -->
+                    <div class="" id="name"> </div>
+                    <!-- <div class="" id="data"></div> -->
                     <!-- </div> -->
                 </div>
-                <ul id="pagination-demo" class="pagination-sm"></ul>
-                <div id="page-content" class="page-content">Page 1</div>
+                <div id="data-container"></div>
+                <div id="pagination-container"></div>
             </div>
         </div>
-       
+
 
     </div>
-        <script src="js/test.js"></script>
+    <script src="js/test.js"></script>
 
 </body>
 

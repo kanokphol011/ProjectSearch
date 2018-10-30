@@ -1,6 +1,6 @@
 var xmlhttp = new XMLHttpRequest();
 var url = '';
-var name, lastname, total, to;
+var name, lastname, total;
 var you = '';
 var all = '';
 var htmldata = '';
@@ -12,6 +12,8 @@ var hearclose = '';
 var x = 'https://api.elsevier.com/content/search/scopus?query=ALL(';
 var y = ')&apiKey=185547eee67ed06e5e817a0f227d23fe';
 var toAdd = document.createDocumentFragment();
+var to =[];
+
 
 $(function () {
 
@@ -29,13 +31,16 @@ $(function () {
         var option2 = '';
         for (i = 0; i < c; i++) {
             g = '';
-            to = jsResult["staffcoc"][i]["id"];
-
+            //to = jsResult["staffcoc"][i]["id"];
+            to.push(jsResult["staffcoc"][i]["id"]);
+           
+            
             name = jsResult["staffcoc"][i]["staffName"].toLowerCase();
             lastname = jsResult["staffcoc"][i]["staffLastName"].toLowerCase();
+            
             g += x + jsResult["staffcoc"][i]["staffName"].toLowerCase() + '%20AND%20' + jsResult["staffcoc"][i]["staffLastName"].toLowerCase() + y;
-            var button = '<button class="btn btn-info" type="submit" id="searchV" value="submit" onclick="myFunction()">View Report' +
-                '<span class="glyphicon glyphicon-share-alt"></span></button><br>';
+            // var button = '<button class="btn btn-info" type="submit" id="searchV" value="submit" onclick="myFunction()">View Report' +
+            //     '<span class="glyphicon glyphicon-share-alt"></span></button><br>';
             //ice += [i]+'<br>';
 
             xmlhttp.open("GET", g, false);
@@ -47,13 +52,15 @@ $(function () {
                 var b = ResultStaff["search-results"]["entry"].length;
                 for (var j = 0; j < b; j++) {
                     if (j == 0) {
-                        r = '<div class="col-sm-5">' + '<h6> <b>' + jsResult["staffcoc"][i]["position"] + '</b> <b> ' + jsResult["staffcoc"][i]["staffName"] +
-                            '</b> <b>' + jsResult["staffcoc"][i]["staffLastName"] + '</b></h6>' + '<select class="yearselect" id="yearselect' + i + '"></select><select class="yearselectto" id="yearselectto' + i + '"></select>' + '<br>' + button + '</div>';
+                        r = '<div class="col-sm-5">' + '<h5> <b>' + jsResult["staffcoc"][i]["position"] + '</b> <b> ' + jsResult["staffcoc"][i]["staffName"] +
+                            '</b> <b>' + jsResult["staffcoc"][i]["staffLastName"] + '</b></h5>' + 
+                            // '<select class="yearselect" id="yearselect' + i + '"></select><select class="yearselectto" id="yearselectto' + i + '"></select>' + '<br>' + button + 
+                            '</div>';
                     } else {
                         r = '<div class="col-sm-5"></div>';
                     }
                     you = '<div class="col-sm-6">' + (j + 1) + ".<b>" + ResultStaff["search-results"]["entry"][j]["dc:title"] + "</b>,<i> " + ResultStaff["search-results"]["entry"][j]["prism:publicationName"] + "</i>, " + ResultStaff["search-results"]["entry"][j]["prism:coverDisplayDate"] + "</br>" + "<p> Number of Citations:" + ResultStaff["search-results"]["entry"][j]["citedby-count"] + "</p><br>" + '</div>';
-                    console.log(ResultStaff["search-results"]["entry"][j]["dc:title"]);
+                    // console.log(ResultStaff["search-results"]["entry"][j]["dc:title"]);
 
                     if (ResultStaff["search-results"]["entry"][j]["dc:title"] != null) {
                         all += r + you;
@@ -67,53 +74,34 @@ $(function () {
             }
             document.getElementById("name").innerHTML = '<div class="row" id="row">' + all + '</div>';
 
-            // for (var j = 0; j < b; j++) {
-            //     if(ResultStaff["search-results"]["entry"][j]["dc:title"] != null){
-            // yearSelect[i] = document.getElementById("yearselect" + i);
-            var myDate = new Date();
-            var year = myDate.getFullYear();
-            for (var l = 2005; l <= year; l++) {
-                // yearselect.options[y]=new Option(thisyear, thisyear);
-                // option1 = document.createElement('option');
-                // option1.value = l;
-                //  option.appendChild(document.createTextNode(j));
-                // option1.textContent = l;
-                // yearSelect[i].appendChild(option1);
-                // console.log(yearSelect[i] + i + "------------------------------------");
-                // var list ='<option value="'+j+'">'+j+'</option>'; 
-                //  document.write(list); 
-                $(".yearselect").append("<option>" + l + "</option>");
-            }
-            // yearSelectto[i] = document.getElementById("yearselectto" + i);
-
-            for (var k = 2005; k <= year; k++) {
-                // option2 = document.createElement('option');
-                //option.value = k;     
-                // option.appendChild(document.createTextNode(j));
-                // option2.textContent = k;
-                // yearSelectto[i].appendChild(option2);
-                // var list ='<option value="'+j+'">'+j+'</option>'; 
-                //  document.write(list); 
-                // console.log(yearSelectto[i] + i + "++++++++++++++++++++++++++++++++++++++");
-
-                $(".yearselectto").append("<option>" + k + "</option>");
-            }
-            //     }
-            // }
 
 
                 
             }
-    
-            $('#pagination-container').pagination({
-                dataSource: [to],
+        
+                // var showName=document.getElementById("showName");
+                //     var pop = jsResult["staffcoc"].length;
+                //    var b='';
+                //     var pass ="";
+                    
+                //         var option = document.createElement('option');
+                //        // b += jsResult["staffcoc"][i]["position"]+jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
+                //         option.value = i;     
+                //         option.textContent = jsResult["staffcoc"][i]["position"]+jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
+                //         console.log(option.textContent);
+                //         showName.appendChild(option);
+                    }
+                
+         
+            $('#name').pagination({
+                dataSource: to,
+                pagesize: 10,
                 callback: function(data, pagination) {
                     // template method of yourself
+                    
                     var html = template(data);
-                    dataContainer.html(html);
+                  
+                    $('#name').html(html);
                 }
             })
-
-        }
-
     })
