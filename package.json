@@ -12,7 +12,8 @@
     "mustache": "^2.3.2",
     "paginationjs": "^2.1.4",
     "patternomaly": "^1.3.0",
-    "pure-js": "^0.2.6"
+    "pure-js": "^0.2.6",
+    "template-js": "^1.0.10"
   },
   "devDependencies": {},
   "scripts": {

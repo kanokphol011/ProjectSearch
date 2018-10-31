@@ -27,8 +27,8 @@ $(function () {
         var g = '';
         var yearSelect = [];
         var yearSelectto = [];
-        var option1 = '';
-        var option2 = '';
+        
+        var usernames = '';
         for (i = 0; i < c; i++) {
             g = '';
             //to = jsResult["staffcoc"][i]["id"];
@@ -52,20 +52,30 @@ $(function () {
                 var b = ResultStaff["search-results"]["entry"].length;
                 for (var j = 0; j < b; j++) {
                     if (j == 0) {
+                        usernames = jsResult["staffcoc"][i]["position"]+ jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
                         r = '<div class="col-sm-5">' + '<h5> <b>' + jsResult["staffcoc"][i]["position"] + '</b> <b> ' + jsResult["staffcoc"][i]["staffName"] +
                             '</b> <b>' + jsResult["staffcoc"][i]["staffLastName"] + '</b></h5>' + 
                             // '<select class="yearselect" id="yearselect' + i + '"></select><select class="yearselectto" id="yearselectto' + i + '"></select>' + '<br>' + button + 
                             '</div>';
                     } else {
+                        usernames =usernames;
                         r = '<div class="col-sm-5"></div>';
                     }
                     you = '<div class="col-sm-6">' + (j + 1) + ".<b>" + ResultStaff["search-results"]["entry"][j]["dc:title"] + "</b>,<i> " + ResultStaff["search-results"]["entry"][j]["prism:publicationName"] + "</i>, " + ResultStaff["search-results"]["entry"][j]["prism:coverDisplayDate"] + "</br>" + "<p> Number of Citations:" + ResultStaff["search-results"]["entry"][j]["citedby-count"] + "</p><br>" + '</div>';
                     // console.log(ResultStaff["search-results"]["entry"][j]["dc:title"]);
 
                     if (ResultStaff["search-results"]["entry"][j]["dc:title"] != null) {
+                        usernames;
                         all += r + you;
                     }
-
+                    // function template(data) {
+                    //     var html = '<ul>';
+                    //     $.each(data, function(index, all){
+                    //         html += '<li>'+ all +'</li>';
+                    //     });
+                    //     html += '</ul>';
+                    //     return html;                        
+                    // }
                 }
                 // all
                 // console.log(all);
@@ -75,7 +85,7 @@ $(function () {
             document.getElementById("name").innerHTML = '<div class="row" id="row">' + all + '</div>';
 
 
-
+         
                 
             }
         
@@ -92,15 +102,16 @@ $(function () {
                 //         showName.appendChild(option);
                     }
                 
-         
+                   
             $('#name').pagination({
                 dataSource: to,
                 pagesize: 10,
                 callback: function(data, pagination) {
-                    // template method of yourself
-                    
-                    var html = template(data);
-                  
+                    // template method of yourself                  
+                    var html = template(data); 
+                    console.log(to);
+                    console.log(html);
+                             
                     $('#name').html(html);
                 }
             })
