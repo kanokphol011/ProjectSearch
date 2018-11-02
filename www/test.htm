@@ -64,46 +64,90 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <ul class="nav navbar-nav">&nbsp;</ul>
                     <ul class="nav navbar-nav navbar-left"></ul>
-                    <ul class="col-md-9">
+                    <ul class="col-md-6">
                         <h3>Result</h3>
 
                     </ul>
                     <br>
-                    <select name="" id="showName" disabled="disabled">
-                        <script>
-                            $(function(){
-                            var showName=document.getElementById("showName");
+                    <label for="chooses">chooses  name</label>
+                    <select class="choosesName" id="choosesName">
+                    <script>
                        
-                            var xmlhttps = new XMLHttpRequest();
-
-                            var urls ='https://staffcoc.000webhostapp.com/db.json';
-                            xmlhttps.open("GET", urls, false);
-                            xmlhttps.send();
-                            if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-                            {
-                             var result = xmlhttp.responseText;
-                                var jsResult = JSON.parse(result);
+                        var choosesNames=document.getElementById("choosesName");
+                        var xmlhttps = new XMLHttpRequest();
+                        var urls ='https://staffcoc.000webhostapp.com/db.json';
+                        xmlhttps.open("GET", urls, false);
+                        xmlhttps.send();
+                        if (xmlhttps.readyState == 4 && xmlhttps.status == 200)
+                        {
+                         var result = xmlhttps.responseText;
+                            var jsResult = JSON.parse(result);                                
+                            var pop = jsResult["staffcoc"].length;
+                            var pass ="";
+                        for(var l =1;l<=pop;l++){
+                           var option = document.createElement('option');
+                           option.value = l;     
+                           passs = urls+'/'+ option.value;
+                           option.textContent = jsResult["staffcoc"][l]["position"]+jsResult["staffcoc"][l]["staffName"]+jsResult["staffcoc"][l]["staffLastName"];
+                           console.log(option.textContent);
+                           choosesNames.appendChild(option); 
+                        }
+                    }
+                    </script>
+                   
+                </select>
+                  
+                        <!-- <input type="text" id="DateYear" required="required"> -->
+                        
+                              
+                            <label for="year">year</label>
+                            <select class="yearselect" id="yearselect">
+                            <script>
+                               
+                                var yearSelect=document.getElementById("yearselect");
+                                var myDate = new Date();
+                                var year = myDate.getFullYear();
+                                for(var j =2005;j<=year ;j++){
+                                   // yearselect.options[y]=new Option(thisyear, thisyear);
+    
+                                   var option = document.createElement('option');
+                                   option.value = j;     
+                                 //  option.appendChild(document.createTextNode(j));
+                                   option.textContent = j;
+                                   yearSelect.appendChild(option);
+                               // var list ='<option value="'+j+'">'+j+'</option>'; 
+                                //  document.write(list); 
                                 
-                                var pop = jsResult["staffcoc"].length;
-                               var b='';
-                                var pass ="";
-                                for(i =0;i<pop;i++){
-                                    var option = document.createElement('option');
-                                   // b += jsResult["staffcoc"][i]["position"]+jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
-                                    option.value = i;     
-                                    option.textContent = jsResult["staffcoc"][i]["position"]+jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
-                                    console.log(option.textContent);
-                                    showName.appendChild(option);
-                                }
                             }
-                        })
-                        </script>
-                    </select>
-                    <a href="reportStaffs.htm">
-                        <button class="btn btn-info" type="submit" id="searchV">
-                            View Report All
+                            </script>
+                           
+                        </select>
+                        to
+                        <select class="yearselectto" id="yearselectto">
+                                <script>
+                                   
+                                    var yearSelectto=document.getElementById("yearselectto");
+                                    var myYear = new Date();
+                                    var years = myYear.getFullYear();
+                                    for(var k =2005;k<=years ;k++){
+        
+                                       var option = document.createElement('option');
+                                       //option.value = k;     
+                                       // option.appendChild(document.createTextNode(j));
+                                       option.textContent = k;
+                                       yearSelectto.appendChild(option);
+                                   // var list ='<option value="'+j+'">'+j+'</option>'; 
+                                    //  document.write(list); 
+                                    
+                                }
+                                </script>
+                               
+                            </select>
+                
+                        <button class="btn btn-info" type="submit" id="searchV"  onclick="myFunction()">
+                            Seach  
                             <span class="glyphicon glyphicon-share-alt"></span>
-                        </button></a>
+                        </button>
                     </ul>
                 </div>
                 <div class="container">
