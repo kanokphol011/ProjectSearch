@@ -15,7 +15,8 @@ var toAdd = document.createDocumentFragment();
 var to =[];
 
 
-$(function () {
+$(
+    function () {
 
     url = 'https://staffcoc.000webhostapp.com/db.json';
     xmlhttp.open("GET", url, false);
@@ -24,25 +25,74 @@ $(function () {
         var result = xmlhttp.responseText;
         var jsResult = JSON.parse(result);
         var c = jsResult["staffcoc"].length;
-        var g = '';
-        var yearSelect = [];
-        var yearSelectto = [];
+        var c1 = jsResult["staffcoc"];
         
-        var usernames = '';
-        for (i = 0; i < c; i++) {
+                // var showName=document.getElementById("showName");
+                //     var pop = jsResult["staffcoc"].length;
+                //    var b='';
+                //     var pass ="";
+                    
+                //         var option = document.createElement('option');
+                //        // b += jsResult["staffcoc"][i]["position"]+jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
+                //         option.value = i;     
+                //         option.textContent = jsResult["staffcoc"][i]["position"]+jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
+                //         console.log(option.textContent);
+                //         showName.appendChild(option);
+                    }
+          
+            $('#pagination-container').pagination({
+                dataSource: c1,
+                totalNumber: 43,
+                pageSize: 5,
+                ajax: {
+                    beforeSend: function() {
+                        $('#data-container').html('Loading data from flickr.com ...');
+                    }
+                },
+                callback: function(data, pagination) {
+                    // template method of yourself  
+                    // var html = Handlebars.compile($('#name').html(), {
+                    //     data: data
+                    // });                
+                    // var html = _.template($('#name').html, {
+                    //     data: data
+                    // }); 
+                    
+                    var html = simpleTemplating(data);
+
+                    $('#data-container').html(html);
+                    
+                }
+            })
+    })
+
+    function simpleTemplating(data) {     
+        // document.getElementById('#data-container').value=''
+        
+        var html = "";
+   
+            // console.log(data);
+            var g = '';
+            var yearSelect = [];
+            var yearSelectto = [];
+            var usernames = '';
+        for (i = 0; i < data.length; i++) {
+            console.log(data[i]);
             g = '';
             //to = jsResult["staffcoc"][i]["id"];
-            to.push(jsResult["staffcoc"][i]["id"]);
+            // to.push(jsResult["staffcoc"][i]["id"]);
            
             
-            name = jsResult["staffcoc"][i]["staffName"].toLowerCase();
-            lastname = jsResult["staffcoc"][i]["staffLastName"].toLowerCase();
+            name = jsResult["staffcoc"][data[i]["id"]]["staffName"].toLowerCase();
+            // console.log(name);
+
+            lastname = jsResult["staffcoc"][data[i]["id"]]["staffLastName"].toLowerCase();
             
-            g += x + jsResult["staffcoc"][i]["staffName"].toLowerCase() + '%20AND%20' + jsResult["staffcoc"][i]["staffLastName"].toLowerCase() + y;
+            g += x + jsResult["staffcoc"][data[i]["id"]]["staffName"].toLowerCase() + '%20AND%20' + jsResult["staffcoc"][data[i]["id"]]["staffLastName"].toLowerCase() + y;
             // var button = '<button class="btn btn-info" type="submit" id="searchV" value="submit" onclick="myFunction()">View Report' +
             //     '<span class="glyphicon glyphicon-share-alt"></span></button><br>';
             //ice += [i]+'<br>';
-
+            console.log(); 
             xmlhttp.open("GET", g, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -50,23 +100,28 @@ $(function () {
                 var Result = xmlhttp.responseText;
                 var ResultStaff = JSON.parse(Result);
                 var b = ResultStaff["search-results"]["entry"].length;
+                console.log(ResultStaff["search-results"]["entry"].length); 
                 for (var j = 0; j < b; j++) {
                     if (j == 0) {
-                        usernames = jsResult["staffcoc"][i]["position"]+ jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
-                        r = '<div class="col-sm-5">' + '<h5> <b>' + jsResult["staffcoc"][i]["position"] + '</b> <b> ' + jsResult["staffcoc"][i]["staffName"] +
-                            '</b> <b>' + jsResult["staffcoc"][i]["staffLastName"] + '</b></h5>' + 
+                        
+                        // usernames = jsResult["staffcoc"][i]["position"]+ jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
+                        r = '<div class="col-sm-5">' + '<h5> <b>' + jsResult["staffcoc"][data[i]["id"]]["position"] + '</b> <b> ' + jsResult["staffcoc"][data[i]["id"]]["staffName"] +
+                            '</b> <b>' + jsResult["staffcoc"][data[i]["id"]]["staffLastName"] + '</b></h5>' + 
                             // '<select class="yearselect" id="yearselect' + i + '"></select><select class="yearselectto" id="yearselectto' + i + '"></select>' + '<br>' + button + 
                             '</div>';
                     } else {
-                        usernames =usernames;
+                        // console.log(ResultStaff["search-results"]["entry"]); 
+                        // usernames = usernames;
                         r = '<div class="col-sm-5"></div>';
                     }
                     you = '<div class="col-sm-6">' + (j + 1) + ".<b>" + ResultStaff["search-results"]["entry"][j]["dc:title"] + "</b>,<i> " + ResultStaff["search-results"]["entry"][j]["prism:publicationName"] + "</i>, " + ResultStaff["search-results"]["entry"][j]["prism:coverDisplayDate"] + "</br>" + "<p> Number of Citations:" + ResultStaff["search-results"]["entry"][j]["citedby-count"] + "</p><br>" + '</div>';
                     // console.log(ResultStaff["search-results"]["entry"][j]["dc:title"]);
+                    
 
                     if (ResultStaff["search-results"]["entry"][j]["dc:title"] != null) {
-                        usernames;
-                        all += r + you;
+                        // usernames;
+                        html += r + you;
+                      
                     }
                     // function template(data) {
                     //     var html = '<ul>';
@@ -82,40 +137,16 @@ $(function () {
 
                 // document.getElementById("data").innerHTML = '<div="col-sm-6">'+you+'</div>';
             }
-            document.getElementById("name").innerHTML = '<div class="row" id="row">' + all + '</div>';
 
-
-         
-                
+            // document.getElementById("name").innerHTML = '<div class="row" id="row">' + all + '</div>';
+            // html += '<div class="row" id="row">' + html + '</div>';
+            
+            
             }
+            html += "";
         
-                // var showName=document.getElementById("showName");
-                //     var pop = jsResult["staffcoc"].length;
-                //    var b='';
-                //     var pass ="";
-                    
-                //         var option = document.createElement('option');
-                //        // b += jsResult["staffcoc"][i]["position"]+jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
-                //         option.value = i;     
-                //         option.textContent = jsResult["staffcoc"][i]["position"]+jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
-                //         console.log(option.textContent);
-                //         showName.appendChild(option);
-                    }
-                
-                   
-            $('#name').pagination({
-                dataSource: to,
-                pagesize: 10,
-                callback: function(data, pagination) {
-                    // template method of yourself                  
-                    var html = template(data); 
-                    console.log(to);
-                    console.log(html);
-                             
-                    $('#name').html(html);
-                }
-            })
-    })
+        return html;
+    }
 
     function myFunction() {
         var choosesName = document.getElementById("choosesName").value;

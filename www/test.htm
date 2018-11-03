@@ -88,7 +88,7 @@
                            var option = document.createElement('option');
                            option.value = l;     
                            passs = urls+'/'+ option.value;
-                           option.textContent = jsResult["staffcoc"][l]["position"]+jsResult["staffcoc"][l]["staffName"]+jsResult["staffcoc"][l]["staffLastName"];
+                           option.textContent = jsResult["staffcoc"][l]["position"]+jsResult["staffcoc"][l]["staffName"]+"  "+jsResult["staffcoc"][l]["staffLastName"];
                            console.log(option.textContent);
                            choosesNames.appendChild(option); 
                         }
@@ -152,12 +152,13 @@
                 </div>
                 <div class="container">
                     <!-- <div class="row" id="row"> -->
-                    <div class="" id="name"> </div>
+                    <div id="data-container"></div>
+                    <div id="pagination-container"></div>
                     <!-- <div class="" id="data"></div> -->
                     <!-- </div> -->
                 </div>
-                <div id="data-container"></div>
-                <div id="pagination-container"></div>
+                
+                
             </div>
         </div>
 
