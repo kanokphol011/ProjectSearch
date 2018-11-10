@@ -116,7 +116,7 @@
                         r += i+1 +". <b><a href="+meet+">"+ jsResult["search-results"]["entry"][i]["dc:title"] + "</a></b>,<i> "+jsResult["search-results"]["entry"][i]["prism:publicationName"]+"</i>, "+jsResult["search-results"]["entry"][i]["prism:coverDisplayDate"]+"</br>";
                         //r += i+1 +". <b>"+ jsResult["search-results"]["entry"][i]["preferred-name"]["surname"] + "</b> ,<i>"+jsResult["search-results"]["entry"][i]["preferred-name"]["given-name"]+"</i> <i> "+jsResult["search-results"]["entry"][i]["affiliation-current"]["affiliation-name"]+"</i>,"+jsResult["search-results"]["entry"][i]["document-count"]+"</br>";
                      }
-                     document.getElementById("show").innerHTML = r;
+                     document.getElementById("showName").innerHTML = r;
                 }
                 else{
                     console.log(Error);
@@ -288,7 +288,7 @@
                                 <div class="form-group">
                                         <div class="col-md-3 ">
                                                 <br>  
-                                       <button class="btn btn-primary btn-lg" id="btnClick" onclick="collectJSON();"> Search</button>
+                                       <a class="btn btn-primary btn-lg" id="btnClick" onclick="collectJSON();"> Search</a>
                 
                                         </div>
                                     </div>
@@ -297,7 +297,7 @@
                             </form>
                         </div>
                     </div>
-                    <div id="show"></div>
+                    <div id="showName"></div>
 
                 </div>
 

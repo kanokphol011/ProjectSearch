@@ -84,10 +84,14 @@
                             var jsResult = JSON.parse(result);                                
                             var pop = jsResult["staffcoc"].length;
                             var pass ="";
-                        for(var l =1;l<=pop;l++){
+                            var positionaj = ""
+                        for(var l =0;l<=pop-1;l++){
                            var option = document.createElement('option');
                            option.value = l;     
                            passs = urls+'/'+ option.value;
+                           console.log(jsResult["staffcoc"][l]);
+                  
+                      
                            option.textContent = jsResult["staffcoc"][l]["position"]+jsResult["staffcoc"][l]["staffName"]+"  "+jsResult["staffcoc"][l]["staffLastName"];
                            console.log(option.textContent);
                            choosesNames.appendChild(option); 

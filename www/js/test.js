@@ -89,10 +89,11 @@ $(
             lastname = jsResult["staffcoc"][data[i]["id"]]["staffLastName"].toLowerCase();
             
             g += x + jsResult["staffcoc"][data[i]["id"]]["staffName"].toLowerCase() + '%20AND%20' + jsResult["staffcoc"][data[i]["id"]]["staffLastName"].toLowerCase() + y;
+            console.log(); 
             // var button = '<button class="btn btn-info" type="submit" id="searchV" value="submit" onclick="myFunction()">View Report' +
             //     '<span class="glyphicon glyphicon-share-alt"></span></button><br>';
             //ice += [i]+'<br>';
-            console.log(); 
+            
             xmlhttp.open("GET", g, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -105,18 +106,25 @@ $(
                     if (j == 0) {
                         
                         // usernames = jsResult["staffcoc"][i]["position"]+ jsResult["staffcoc"][i]["staffName"]+jsResult["staffcoc"][i]["staffLastName"];
-                        r = '<div class="col-sm-5">' + '<h5> <b>' + jsResult["staffcoc"][data[i]["id"]]["position"] + '</b> <b> ' + jsResult["staffcoc"][data[i]["id"]]["staffName"] +
+                        r = '<div class="col-sm-6" style="border-top: 2px solid red;">' + '<h5> <b>' + jsResult["staffcoc"][data[i]["id"]]["position"] + '</b> <b> ' + jsResult["staffcoc"][data[i]["id"]]["staffName"] +
                             '</b> <b>' + jsResult["staffcoc"][data[i]["id"]]["staffLastName"] + '</b></h5>' + 
                             // '<select class="yearselect" id="yearselect' + i + '"></select><select class="yearselectto" id="yearselectto' + i + '"></select>' + '<br>' + button + 
                             '</div>';
+
                     } else {
                         // console.log(ResultStaff["search-results"]["entry"]); 
                         // usernames = usernames;
-                        r = '<div class="col-sm-5"></div>';
+                        r = '<div class="col-sm-6 style="border-top: 2px solid #ccccb3;"></div>';
                     }
-                    you = '<div class="col-sm-6">' + (j + 1) + ".<b>" + ResultStaff["search-results"]["entry"][j]["dc:title"] + "</b>,<i> " + ResultStaff["search-results"]["entry"][j]["prism:publicationName"] + "</i>, " + ResultStaff["search-results"]["entry"][j]["prism:coverDisplayDate"] + "</br>" + "<p> Number of Citations:" + ResultStaff["search-results"]["entry"][j]["citedby-count"] + "</p><br>" + '</div>';
+
+                    if(j == 0){
+                        you = '<div class="col-sm-6" style="border-top: 2px solid red;">' + (j + 1 ) + ".<b>" + ResultStaff["search-results"]["entry"][j]["dc:title"] + "</b>,<i> " + ResultStaff["search-results"]["entry"][j]["prism:publicationName"] + "</i>, " + ResultStaff["search-results"]["entry"][j]["prism:coverDisplayDate"] + "</br>" + "<p> Number of Citations:" + ResultStaff["search-results"]["entry"][j]["citedby-count"] + "</p><br>" + '</div>';
+                    }else{
+                        you = '<div class="col-sm-6" style="border-top: 2px solid #ccccb3;">' + (j + 1) + ".<b>" + ResultStaff["search-results"]["entry"][j]["dc:title"] + "</b>,<i> " + ResultStaff["search-results"]["entry"][j]["prism:publicationName"] + "</i>, " + ResultStaff["search-results"]["entry"][j]["prism:coverDisplayDate"] + "</br>" + "<p> Number of Citations:" + ResultStaff["search-results"]["entry"][j]["citedby-count"] + "</p><br>" + '</div>';
+                    }
+                    // you = '<div class="col-sm-6">' + (j + 1) + ".<b>" + ResultStaff["search-results"]["entry"][j]["dc:title"] + "</b>,<i> " + ResultStaff["search-results"]["entry"][j]["prism:publicationName"] + "</i>, " + ResultStaff["search-results"]["entry"][j]["prism:coverDisplayDate"] + "</br>" + "<p> Number of Citations:" + ResultStaff["search-results"]["entry"][j]["citedby-count"] + "</p><br>" + '</div>';
                     // console.log(ResultStaff["search-results"]["entry"][j]["dc:title"]);
-                    
+
 
                     if (ResultStaff["search-results"]["entry"][j]["dc:title"] != null) {
                         // usernames;
