@@ -13,9 +13,9 @@ $(function(){
          var staffId ="";
          var pass =""
          for(i =0;i<c;i++){
-            staffId += i+1 + jsResult["staffcoc"][i]["id"];
-             passs = url+'/'+staffId;
-              r += "<a href="+'"resultStaff.htm?id='+jsResult["staffcoc"][i]["id"]+'"'+">"+"<i>"+ jsResult["staffcoc"][i]["id"] + "</i>.<i>"+ jsResult["staffcoc"][i]["position"] + "</i> <i> "+jsResult["staffcoc"][i]["staffName"]+"</i> <i>"+jsResult["staffcoc"][i]["staffLastName"]+"</i></a></br>";
+              staffId += i+1 + jsResult["staffcoc"][i]["id"];
+              passs = url+'/'+staffId;
+              r += "<a href="+'"resultStaff.htm?id='+jsResult["staffcoc"][i]["id"]+'"'+">"+"<i>"+ jsResult["staffcoc"][i]["position"] + " "+jsResult["staffcoc"][i]["staffName"]+" "+jsResult["staffcoc"][i]["staffLastName"]+"</i></a></br>";
          }
         document.getElementById("show").innerHTML = r;
     }

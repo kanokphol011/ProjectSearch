@@ -1,62 +1,90 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
-    <!-- jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" rel="stylesheet" type="text/css" href="css/home.css">
     <title>Result</title>
+
+    <style> 
+        i {
+            line-height: 2;
+            letter-spacing: 0.5px;
+            font-size: 15px;
+            
+            
+        }
+        a {
+            font-size: 15px;
+            
+        }
+        h1.topValue {
+            font-size: 30px;
+        }
+        select.yearselect{
+            font-size: 15px;
+        }
+        select.yearselectto{
+            font-size: 15px;
+        }
+        label{
+            font-size: 15px;
+        }
+        b{
+            font-size: 18px;
+        }
+        i.dateData{
+            font-size: 15px;
+        }
+        p{
+            font-size: 13px;
+            font-weight: bold;
+        }
+        
+    </style>
 
 </head>
 
 <body background="">
-    <div class="loader"></div>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Menu</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand">COC Publication Report System</a>
-                </div>
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <ul class="nav navbar-nav">&nbsp;</ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="logout.htm" id="btn">Logout</a>
-                        </li>
-                        <li>
-                            <a href="home.htm" id="btn">Search</a>
-                        </li>
-                        <li>
-                            <a href="COCAcademicStaff.htm" id="btn">COC Academic Staff</a>
-                        </li>
-                        <li>
-                            <a href="contact.htm" id="btn">Contact</a>
-                        </li>
-                        <li>
-                            <a>User</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-default bg-default">
+            <a class="navbar-brand " href="#"> <img class="logo" src="photo/logo.png" width="300" height="50"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar1">
+                <ul class="navbar-nav ml-auto ">
+                    <li class="nav-item active">
+                        <h4> <a class="nav-link" href="logout.php">&nbsp;&nbsp;Logout </a></h4>
+                    </li>
+                    <li class="nav-item active">
+                        <h4> <a class="nav-link" href="home.php">&nbsp;&nbsp;Search <span class="sr-only">(current)</span></a></h4>
+                    </li>
+                    <li class="nav-item active">
+                        <h4> <a class="nav-link" href="COCAcademicStaff.php">&nbsp;&nbsp;COC Academic Staff</a></h4>
+                    </li>
+                    <li class="nav-item active">
+                        <h4> <a class="nav-link" href="contact.php">&nbsp;&nbsp;Contact</a></h4>
+                    </li>
+                    <li class="nav-item active">
+                        <h4> <a class="nav-link" href="" charset="UTF-8">&nbsp;&nbsp;<?php echo $_SESSION["IDname"];?></a></h4>
+                    </li>
+                </ul>
             </div>
-
         </nav>
         <div class="container" style=background-color:#009999;>
             <div class="navbar-header">
-                <h1 style=color:#f4f8f8;>Search by COC Academic staff</h1>
+                <h1 class="topValue" style=color:#f4f8f8;>Search by COC Academic staff</h1>
 
             </div>
 
@@ -71,17 +99,7 @@
                         <div class="col-md-9" id="Name">
                             
                         </div>
-                        <form id="searchForm" class="form-horizontal" action="" method="POST" role="form">
-                            <div class="form-group col-md-2">
-                                <input type="text" class="form-control" id="history" name="search" placeholder="Search"
-                                    maxlength="100" autofocus>
-
-                            </div>&nbsp;&nbsp;
-                            <span class="glyphicon glyphicon-search"></span>
-                       
-
-
-                        </ul>
+                        
                         <br>
                     </legend>
                 </div>
@@ -90,21 +108,63 @@
 
 
                 <div class="col-md-3  " id="image">
-                    <div id="NumberofArticles"> </div>  
+
                     <!-- <input type="text" id="DateYear" required="required"> -->
-                    <input type="text" id="DateYear" name="year" placeholder="Year"  minlength="4" maxlength="4" required="required"> 
+                    
+                          
+                        <label for="year">year</label>
+                        <select class="yearselect" id="yearselect">
+                        <script>
+                           
+                            var yearSelect=document.getElementById("yearselect");
+                            var myDate = new Date();
+                            var year = myDate.getFullYear();
+                            for(var j =1990;j<=year ;j++){
+                               // yearselect.options[y]=new Option(thisyear, thisyear);
+
+                               var option = document.createElement('option');
+                               option.value = j;     
+                             //  option.appendChild(document.createTextNode(j));
+                               option.textContent = j;
+                               yearSelect.appendChild(option);
+                           // var list ='<option value="'+j+'">'+j+'</option>'; 
+                            //  document.write(list); 
+                            
+                        }
+                        </script>
+                       
+                    </select>
+                    <label for="year">to</label>
+                    <select class="yearselectto" id="yearselectto">
+                            <script>
+                               
+                                var yearSelectto=document.getElementById("yearselectto");
+                                var myYear = new Date();
+                                var years = myYear.getFullYear();
+                                for(var k =2005;k<=years ;k++){
+    
+                                   var option = document.createElement('option');
+                                   //option.value = k;     
+                                   // option.appendChild(document.createTextNode(j));
+                                   option.textContent = k;
+                                   yearSelectto.appendChild(option);
+                               // var list ='<option value="'+j+'">'+j+'</option>'; 
+                                //  document.write(list); 
+                                
+                            }
+                            </script>
+                           
+                        </select>
+                    
+              <!-- <input type="text" id="DateYear" name="year" placeholder="Year"  minlength="4" maxlength="4" required="required">  -->
                     <br>
 
                     <br>
-                    <div ></div>
-                    <button type="button" id="btn" value="submit" onclick="myFunction()" >View Report </button>
-                     <!-- + id=+tid+&name=+name+&lastname=+lastname+&year= -->
-                    <a href="reportStaffs.htm"></a>
-                    <!-- <button class="btn btn-info" type="submit" id="searchV" onclick="reportStaffs.htm"> -->
-                        <!-- View Report -->
-                        <!-- <span class="glyphicon glyphicon-share-alt"></span>
-                    </button> -->
-                </a>
+                 
+                    <button class="btn btn-info" type="button" id="btn" value="submit" onclick="myFunction()" ><a>View Report</a></button>
+                    <!-- <a href="reportStaffs.htm"></a> -->
+                  
+               
                     <br>
                     <br>
 
@@ -126,5 +186,6 @@
 
     </div>
 <script src="js/resultStaff.js"></script>   
+
 
 </body>
