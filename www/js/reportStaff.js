@@ -230,13 +230,13 @@ $(function(){
         //ข้อมูลใน Array ที่เตรียมไว้แปลงเป็น CSV
         for(i =0;i<datastaff;i++){
             authorAllurl[i] = jsResult["search-results"]["entry"][i]["prism:url"];
-            console.log(i+" :"+authorAll[i]);
+            console.log(i+" :"+authorAllurl[i]);
         }
     }else {
         var text = "none" ;
         document.getElementById("showresult").innerHTML = text;
     }
-    xmlhttp.abort();
+    
  })
 
  $(function(){
