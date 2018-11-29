@@ -13,7 +13,10 @@ var stockData = new Array;
 var numYearB = new Array;
 var authorAllurl = new Array;
 var authorAll = new Array;
-
+var authorSimple = new Array;
+var titleAll = new Array;
+var checkStockData = new Array;
+var dataScopusID = new Array;
 
 $(function(){
     // is the string "id"
@@ -112,6 +115,14 @@ $(function(){
                 }else if(issuse2=='Book Series'){
                     numBook += 1;
                 }
+
+
+            // title งานวิจัย
+            titleAll[i] = jsResult["search-results"]["entry"][i]["dc:title"];
+
+            // scopusID
+            var scopusID = jsResult["search-results"]["entry"][i]["dc:identifier"];
+            dataScopusID[i] = parseInt(scopusID.split("SCOPUS_ID:").pop());
             
         }
 
@@ -211,13 +222,13 @@ function saveArtType() {
 
 }
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //URLข้อมูลauthorทั้งหมด
 $(function(){
     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
     url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+1+''+y;
-    console.log('get success');
+    // console.log('get success');
     xmlhttp.open("GET", url, false);
     xmlhttp.send();
     
@@ -230,7 +241,7 @@ $(function(){
         //ข้อมูลใน Array ที่เตรียมไว้แปลงเป็น CSV
         for(i =0;i<datastaff;i++){
             authorAllurl[i] = jsResult["search-results"]["entry"][i]["prism:url"];
-            console.log(i+" :"+authorAllurl[i]);
+            // console.log(i+" :"+authorAllurl[i]);
         }
     }else {
         var text = "none" ;
@@ -240,35 +251,73 @@ $(function(){
  })
 
  $(function(){
-    //  for(a=0;a<authorAllurl.length;a++){
-        var x =authorAllurl[0];
-        var y='?field=authors&apiKey=185547eee67ed06e5e817a0f227d23fe';
+     for(a=0;a<authorAllurl.length;a++){
+        var authorSimple = new Array;
+        var x =authorAllurl[a];
+        var y='?field=authors&apiKey=185547eee67ed06e5e817a0f227d23fe&httpAccept=application%2Fjson';
         url =x+y;
-        console.log(url);
+        // console.log(url);
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
         
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
     
             var result = xmlhttp.responseText;
-
+            // console.log(result);
             var jsResult = JSON.parse(result);
             
-            var datastaff = jsResult["search-results"]["authors"].length;
+            var datastaff = jsResult["abstracts-retrieval-response"]["authors"]["author"].length;
+            // console.log("///////// :"+datastaff);
     
-            // //
-            // for(i =0;i<datastaff;i++){
-            //     authorAll[i] = jsResult["search-results"]["authors"][i]["author"];
-            //     console.log(i+" :"+authorAll[i]);
-            // }
+            //
+            for(i =0;i<datastaff;i++){
+                
+                authorSimple[i] = jsResult["abstracts-retrieval-response"]["authors"]["author"][i]["ce:given-name"]+" "+jsResult["abstracts-retrieval-response"]["authors"]["author"][i]["preferred-name"]["ce:surname"];
+                // console.log(i+" :"+authorAll[i]);
+                if(datastaff == 1){
+                    authorAll[a] = authorSimple[i];
+                }
+                else if(datastaff == 2){
+                    if (i == 0){
+                        authorAll[a] = authorSimple[i]+", ";
+                    }
+                    else if(i > 0 && i < datastaff){
+                            authorAll[a] += authorSimple[i];
+                    }
+                }
+                else if (datastaff > 2){
+                    if (i == 0){
+                        authorAll[a] = authorSimple[i]+", ";
+                    }
+                    else if(i > 0 && i != datastaff-1){
+                        authorAll[a] += authorSimple[i]+", ";
+                    }
+                    else{
+                        authorAll[a] += authorSimple[i];
+                    }
+                }
+                
+                // document.getElementById("ShowAuthor").innerHTML = "<tr><td>"+titleAll[i]+"</td><td>"+authorAll[i]+"</td></tr>";
+                // var table = document.getElementById("ShowAuthor");
+                // var row = table.insertRow(1);
+                // var cell1 = row.insertCell(0);
+                // var cell2 = row.insertCell(1);
+                // cell1.innerHTML = titleAll[i];
+                // cell2.innerHTML = authorAll[i];
+            }
+
+            // console.log(authorAll[a]);
+
         }else {
             var text = "none" ;
             document.getElementById("showresult").innerHTML = text;
         }
         
-    // }
+    }
     
  })
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //แปลงข้อมูลเป็นCSV
  function convertArrayOfObjectsToCSV(args) {
@@ -312,6 +361,7 @@ function downloadCSV(args) {
     console.log('get success');
     xmlhttp.open("GET", url, false);
     xmlhttp.send();
+    console.log(authorAll);
     
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
 
@@ -321,12 +371,14 @@ function downloadCSV(args) {
 
         //ข้อมูลใน Array ที่เตรียมไว้แปลงเป็น CSV
         for(i =0;i<datastaff;i++){
-            stockData[i] = {Name: name+' '+lastname, 
-                            Article: jsResult["search-results"]["entry"][i]["dc:title"],
-                            PublicationYear: jsResult["search-results"]["entry"][i]["prism:coverDate"], 
-                            ArticleType: jsResult["search-results"]["entry"][i]["prism:aggregationType"], 
-                            Citation: jsResult["search-results"]["entry"][i]["citedby-count"]
-                           };
+            stockData[i] = [authorAll[i], 
+                            jsResult["search-results"]["entry"][i]["dc:title"],
+                            jsResult["search-results"]["entry"][i]["prism:coverDate"], 
+                            jsResult["search-results"]["entry"][i]["prism:aggregationType"],
+                            "citation : "+ jsResult["search-results"]["entry"][i]["citedby-count"]
+                            ]           
+                           ;
+                           console.log(i+":"+authorAll[i]);
         }
     }else {
         var text = "none" ;
@@ -353,7 +405,8 @@ function downloadCSV(args) {
     link.click();
 }
 
-function showData(){
+$(function (){
+    
     xmlhttp.open("GET", "php/getData.php", true);
     xmlhttp.send();
 
@@ -366,24 +419,37 @@ function showData(){
             var html = "";
             for (var a = 0; a < sss.length; a++)
             {
-                var DfirstName = sss[a].staffName;
-                var DlastName = sss[a].staffLName;
-                var DArt = sss[a].article;
+                // var DfirstName = sss[a].staffName;
+                // var DlastName = sss[a].staffLName;
+                // var DArt = sss[a].article;
 
-                html += (a+1)+".) "+DfirstName+"-----"+DlastName+"-----"+DArt+"<br>";
-                                  
+                // html += (a+1)+".) "+DfirstName+"-----"+DlastName+"-----"+DArt+"<br>";
+                checkStockData[a] = {ID: sss[a].ID,
+                    Name: sss[a].staffName,
+                    LName: sss[a].staffLName, 
+                    Article: sss[a].article,
+                    PublicationYear: sss[a].pupdate, 
+                    ArticleType: sss[a].articleType, 
+                    Citation: sss[a].cite
+                    };
+                                    
             }
-            document.getElementById("showResult1").innerHTML = html;
+            //console.log();
+            
+            //document.getElementById("showResult1").innerHTML = html;
         }
     }
-    xmlhttp.abort();
-
-}
+    
+    
+})
 
 
 
 
 function addData() {
+
+    // console.log(checkStockData);
+    
     var stockData = new Array;
     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
@@ -398,21 +464,34 @@ function addData() {
         var jsResult = JSON.parse(result);
         var datastaff = jsResult["search-results"]["entry"].length;
 
-        //ข้อมูลใน Array ที่เตรียมไว้แปลงเป็น CSV
+        //
         for(i =0;i<datastaff;i++){
-            stockData[i] = {Name: name,
+            
+            stockData[i] = {ID : dataScopusID[i],
+                            Name: name,
                             LName: lastname, 
                             Article: jsResult["search-results"]["entry"][i]["dc:title"],
                             PublicationYear: jsResult["search-results"]["entry"][i]["prism:coverDate"], 
                             ArticleType: jsResult["search-results"]["entry"][i]["prism:aggregationType"], 
                             Citation: jsResult["search-results"]["entry"][i]["citedby-count"]
                            };
+            console.log(stockData[i]["ID"]);
+            if (stockData[i]["ID"]!=parseInt(checkStockData[i]["ID"])){
+                console.log("ADD");
+            }
+            if (stockData[i]["ID"]==parseInt(checkStockData[i]["ID"])){
+                console.log("DontADD");
+            }
         }
     }else {
         var text = "none" ;
         document.getElementById("showresult").innerHTML = text;
     }
+
+    
     xmlhttp.abort();
+    
+    
     console.log(stockData);
     var myJsonString = JSON.stringify(stockData);
     xmlhttp.onreadystatechange = respond;
@@ -471,4 +550,7 @@ function deleteData(){
     console.log('555');
 }
 
+$(function(){
+        console.log(dataScopusID);
+})
 
