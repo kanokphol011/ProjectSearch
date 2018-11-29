@@ -10,16 +10,17 @@ if (!$con) {
 }
 
  if(is_array($response)){
-    $sql="INSERT INTO staffcoc (staffName,staffLName,article,articleType,pupdate,cite) VALUES";
+    $sql="INSERT INTO staffcoc (ID,staffName,staffLName,article,articleType,pupdate,cite) VALUES";
     $valuesArr = array();
     foreach($response as $row){
+        $ID = mysql_real_escape_string( $row['ID'] );
         $Name = mysql_real_escape_string( $row['Name'] );
         $LName = mysql_real_escape_string( $row['LName'] );
         $Article = mysql_real_escape_string( $row['Article'] );
         $ArticleType = mysql_real_escape_string( $row['ArticleType'] );
         $PublicationYear = mysql_real_escape_string( $row['PublicationYear'] );
         $Citation = mysql_real_escape_string( $row['Citation'] );
-        $valuesArr[] = "('$Name', '$LName', '$Article','$ArticleType','$PublicationYear','$Citation')";
+        $valuesArr[] = "('$ID','$Name', '$LName', '$Article','$ArticleType','$PublicationYear','$Citation')";
 
         // $sqlCheck = "SELECT * FROM staffcoc WHERE   staffName= '$Name' and 
         //                                             staffLName= '$LName' and 
