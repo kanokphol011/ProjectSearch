@@ -17,6 +17,7 @@ var authorSimple = new Array;
 var titleAll = new Array;
 var checkStockData = new Array;
 var dataScopusID = new Array;
+var stockDatabase = new Array;
 
 $(function(){
     // is the string "id"
@@ -330,13 +331,9 @@ $(function(){
 
     columnDelimiter = args.columnDelimiter || ',';
     lineDelimiter = args.lineDelimiter || '\n';
-
     keys = Object.keys(data[0]);
 
     result = '';
-    result += keys.join(columnDelimiter);
-    result += lineDelimiter;
-
     data.forEach(function(item) {
         ctr = 0;
         keys.forEach(function(key) {
@@ -347,7 +344,6 @@ $(function(){
         });
         result += lineDelimiter;
     });
-
     return result;
 }
 
@@ -378,8 +374,8 @@ function downloadCSV(args) {
                             "citation : "+ jsResult["search-results"]["entry"][i]["citedby-count"]
                             ]           
                            ;
-                           console.log(i+":"+authorAll[i]);
         }
+        console.log(stockData);
     }else {
         var text = "none" ;
         document.getElementById("showresult").innerHTML = text;
@@ -405,7 +401,9 @@ function downloadCSV(args) {
     link.click();
 }
 
-$(function (){
+
+
+function showData(){
     
     xmlhttp.open("GET", "php/getData.php", true);
     xmlhttp.send();
@@ -419,42 +417,37 @@ $(function (){
             var html = "";
             for (var a = 0; a < sss.length; a++)
             {
-                // var DfirstName = sss[a].staffName;
-                // var DlastName = sss[a].staffLName;
-                // var DArt = sss[a].article;
-
-                // html += (a+1)+".) "+DfirstName+"-----"+DlastName+"-----"+DArt+"<br>";
+                
                 checkStockData[a] = {ID: sss[a].ID,
-                    Name: sss[a].staffName,
-                    LName: sss[a].staffLName, 
-                    Article: sss[a].article,
-                    PublicationYear: sss[a].pupdate, 
-                    ArticleType: sss[a].articleType, 
-                    Citation: sss[a].cite
-                    };
-                                    
+                                    Name: sss[a].staffName,
+                                    LName: sss[a].staffLName, 
+                                    Article: sss[a].article,
+                                    PublicationYear: sss[a].pupdate, 
+                                    ArticleType: sss[a].articleType, 
+                                    Citation: sss[a].cite
+                                    };                    
             }
-            //console.log();
             
-            //document.getElementById("showResult1").innerHTML = html;
         }
     }
+    return checkStockData;
     
-    
+}
+
+$(function(){
+    if(showData() !== null){
+        console.log("6789");
+    }
+    if(showData() === 'undefined'){
+        console.log("7777");
+    }
+
 })
 
-
-
-
-function addData() {
-
-    // console.log(checkStockData);
-    
-    var stockData = new Array;
+$(function(){
     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
     url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+1+''+y;
-    console.log('get success');
     xmlhttp.open("GET", url, false);
     xmlhttp.send();
     
@@ -463,11 +456,9 @@ function addData() {
         var result = xmlhttp.responseText;
         var jsResult = JSON.parse(result);
         var datastaff = jsResult["search-results"]["entry"].length;
-
-        //
         for(i =0;i<datastaff;i++){
             
-            stockData[i] = {ID : dataScopusID[i],
+            stockDatabase[i] = {ID : dataScopusID[i],
                             Name: name,
                             LName: lastname, 
                             Article: jsResult["search-results"]["entry"][i]["dc:title"],
@@ -475,14 +466,8 @@ function addData() {
                             ArticleType: jsResult["search-results"]["entry"][i]["prism:aggregationType"], 
                             Citation: jsResult["search-results"]["entry"][i]["citedby-count"]
                            };
-            console.log(stockData[i]["ID"]);
-            if (stockData[i]["ID"]!=parseInt(checkStockData[i]["ID"])){
-                console.log("ADD");
-            }
-            if (stockData[i]["ID"]==parseInt(checkStockData[i]["ID"])){
-                console.log("DontADD");
-            }
         }
+        
     }else {
         var text = "none" ;
         document.getElementById("showresult").innerHTML = text;
@@ -490,10 +475,15 @@ function addData() {
 
     
     xmlhttp.abort();
+})
+
+
+function addData() {
+
+     console.log(stockDatabase);
+     console.log(checkStockData); 
     
-    
-    console.log(stockData);
-    var myJsonString = JSON.stringify(stockData);
+    var myJsonString = JSON.stringify(stockDatabase);
     xmlhttp.onreadystatechange = respond;
     xmlhttp.open("POST", "php/test.php", true);
     xmlhttp.send(myJsonString);
@@ -503,45 +493,6 @@ function addData() {
             document.getElementById('showResult').innerHTML = xmlhttp.responseText;
         }
     }
-
-    
-
-    // var namePHP = new Array;
-    // var lastnamePHP = new Array;
-    // var ArtPHP = new Array;
-
-                
-    // var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
-    // var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
-    // url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+1+''+y;
-    // console.log('get success');
-    // xmlhttp.open("GET", url, false);
-    // xmlhttp.send();
-                
-    
-    //         if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-
-    //                 var result = xmlhttp.responseText;
-    //                 var jsResult = JSON.parse(result);
-    //                 var datastaff = jsResult["search-results"]["entry"].length;
-
-                    
-    //                 for(a =0;a<datastaff;a++){
-    //                     console.log(datastaff);
-    //                     namePHP[a] = name;
-    //                     lastnamePHP[a] = lastname;
-    //                     ArtPHP[a] = jsResult["search-results"]["entry"][a]["dc:title"];
-    //                 }
-    //             }
-    //                     // PupDataPHP[a] = jsResult["search-results"]["entry"][a]["prism:coverDate"];
-    //                     // console.log(PupDataPHP);
-    //             xmlhttp.open("GET","php/updatePHP.php?name="+namePHP[a]+
-    //                                                         "&lastname="+lastnamePHP[a]+
-    //                                                         "&article="+ArtPHP[a]
-    //                                                         // "&pupdate="+PupDatePHP[a]
-    //                                                         ,true);
-    //             console.log(ArtPHP[a]);
-    //             xmlhttp.send();
 }
 
 function deleteData(){
