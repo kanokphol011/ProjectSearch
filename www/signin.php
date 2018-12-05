@@ -22,9 +22,9 @@ session_start();
 		
 	</head>
 	<body background="">
-		<div class="loader"></div>
+
 		<div id="app">
-			<nav class="navbar navbar-default navbar-static-top">
+			<nav class="navbar navbar-default bg-default">
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
@@ -33,17 +33,17 @@ session_start();
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand">COC Publication Report System</a>
-					</div>
+						<a class="navbar-brand " href="#"> <img class="logo" src="photo/logo.png" width="300" height="50"></a>					</div>
 					<div class="collapse navbar-collapse" id="app-navbar-collapse">
 						<ul class="nav navbar-nav">&nbsp;</ul>
 						<ul class="nav navbar-nav navbar-right">
+						<br>
 							<li><a href="signin.php" id="btn">Signin</a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>
-	
+	<br>
 			<div class="container"style=background-color:#009999;>
 				<div class="navbar-header">
 					<h1 style=color:#f4f8f8;>Sign  in</h1>

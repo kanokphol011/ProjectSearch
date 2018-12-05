@@ -63,7 +63,7 @@ session_start();
 
 </head>
 
-<body>
+<body background="photo/index.jpg">
     <div id="app">
 
         <nav class="navbar navbar-expand-lg navbar-default bg-default">
@@ -93,7 +93,7 @@ session_start();
             </div>
         </nav>
         <br>
-        <div class="container" class="container-fluid bg-success" style="background-color:#009999;padding-top:20px;padding-bottom:20px">
+        <div class="container" class="container-fluid bg-success" style="background-color:#009999;padding-top:13px;padding-bottom:13px">
             <div class="navbar-header">
                 <h1 style=color:#f4f8f8;>Search</h1>
 
@@ -102,30 +102,30 @@ session_start();
         </div>
         <br>
         <div class="container">
-            <div class="row" style=background-color:#ccccb3;>
+            <div class="row" style=background-color:#ccccb3;><!--style=background-color:#ccccb3;-->
 
 
                 <div class="bs-example">
-                    <div class="list-group">
+                    <div class="list-group ">
                         <a href="home.php" class="list-group-item">
-                            <h3> <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp; All <span class="badge"></span></h3>
+                            <h4> <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp; All <span class="badge"></span></h4>
                         </a>
                         <a href="authors.php" class="list-group-item">
-                            <h3> <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp; Authors <span class="badge"></span></h3>
+                            <h4> <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp; Authors <span class="badge"></span></h4>
                         </a>
                         <a href="advanced.php" class="list-group-item">
-                            <h3> <span class="glyphicon glyphicon-zoom-in"></span>&nbsp;&nbsp; Advanced <span class="badge"></span></h3>
+                            <h4> <span class="glyphicon glyphicon-zoom-in"></span>&nbsp;&nbsp; Advanced <span class="badge"></span></h4>
                         </a>
 
                     </div>
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <br>
 
                     <div class="container">
                         <div class="form-group">
-
+    <br>
                             <h2><label for="name">Seach </label></h2>
                             <input type="text" class="form-control col-md-4" id="all" name="all" required="required"><br>
                             

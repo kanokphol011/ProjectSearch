@@ -73,7 +73,7 @@ session_start();
 
 </head>
 
-<body background="">
+<body background="photo/index.jpg">
  
     <div id="app">
             <nav class="navbar navbar-expand-lg navbar-default bg-default">
@@ -116,30 +116,31 @@ session_start();
                     <div class="bs-example">
                             <div class="list-group">
                                 <a href="home.php" class="list-group-item">
-                                    <h3> <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp; All <span class="badge"></span></h3>
+                                    <h4> <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp; All <span class="badge"></span></h4>
                                 </a>
                                 <a href="authors.php" class="list-group-item">
-                                    <h3> <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp; Authors <span class="badge"></span></h3>
+                                    <h4> <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp; Authors <span class="badge"></span></h4>
                                 </a>
                                 <a href="advanced.php" class="list-group-item">
-                                    <h3> <span class="glyphicon glyphicon-zoom-in"></span>&nbsp;&nbsp; Advanced <span class="badge"></span></h3>
+                                    <h4> <span class="glyphicon glyphicon-zoom-in"></span>&nbsp;&nbsp; Advanced <span class="badge"></span></h4>
                                 </a>
         
                             </div>
                         </div>
 
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <br>
 
                     <div class="container">
-                            <h2><label for="name">Seach </label></h2>
+                    <br>
+                            <h2><label for="name">Seach </label></h2><br>
                         <div class="form-row">
                                 
                                 <h5> <label for="Authorsname">Authors name </label></h5>&nbsp;&nbsp;
-                                <input class="form-control col-md-4"  type="text" id="Nauthor" name="Nauthor" placeholder="Authors name"
+                                <input class="form-control col-md-3"  type="text" id="Nauthor" name="Nauthor" placeholder="Authors name"
                                     required="required">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <h5><label for="AuthorsLastname" >Authors Lastname</label></h5>&nbsp;&nbsp;    
-                                <input class="form-control col-md-4"  type="text" id="Lauthor" name="Lauthor" placeholder="Authors Lastname"
+                                <input class="form-control col-md-3"  type="text" id="Lauthor" name="Lauthor" placeholder="Authors Lastname"
                                     required="required">
                             
 
