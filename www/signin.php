@@ -21,7 +21,7 @@ session_start();
 		<title>Sign in</title>
 		
 	</head>
-	<body background="">
+	<body >
 
 		<div id="app">
 			<nav class="navbar navbar-default bg-default">
