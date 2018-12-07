@@ -63,10 +63,10 @@ session_start();
 
 </head>
 
-<body background="photo/index.jpg">
+<body  >
     <div id="app">
 
-        <nav class="navbar navbar-expand-lg navbar-default bg-default">
+        <nav class="navbar navbar-expand-lg navbar-default bg-default" >
             <a class="navbar-brand " href="#"> <img class="logo" src="photo/logo.png" width="300" height="50"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbarNav"
                 aria-expanded="false" aria-label="Toggle navigation">
