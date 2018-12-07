@@ -73,7 +73,7 @@ session_start();
 
 </head>
 
-<body background="photo/index.jpg">
+<body >
  
     <div id="app">
             <nav class="navbar navbar-expand-lg navbar-default bg-default">
