@@ -22,16 +22,8 @@ session_start();
 
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Menu</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand">COC Publication Report System</a>
-                </div>
+                    <a class="navbar-brand " href="#"> <img class="logo" src="photo/logo.png" width="300" height="50"></a>
+               <br>
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <ul class="nav navbar-nav">&nbsp;</ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -50,12 +42,10 @@ session_start();
                         
                     </ul>
                 </div>
-            </div>
-
         </nav>
-        <div class="container" style=background-color:#009999;>
+        <div class="container" style=background-color:#33c0ca;>
             <div class="navbar-header">
-                <h1 style=color:#f4f8f8;>Report</h1>
+                <h3 style=color:#f4f8f8;>Report</h3>
 
             </div>
 
@@ -68,7 +58,7 @@ session_start();
                         <ul class="nav navbar-nav">&nbsp;</ul>
                         <ul class="nav navbar-nav navbar-left"></ul>
                         <div class="col-md-12">
-                            <h3 id="namestaff">Report All</h3>
+                            <h4 id="namestaff">Report All</h4>
                         </div>
 
                         <button class="btn btn-info" onclick='downloadCSV({ filename: "stock-data.csv" });' id='ExportA'>
@@ -117,12 +107,12 @@ session_start();
                         </tr>
                     </table> -->
 
-                    <div id="showResult"></div>
-                    <div id="showResult1"></div>
+                    <!-- <div id="showResult"></div> -->
+                    <!-- <div id="showResult1"></div>
                     <button class="btn btn-info" onclick='showData();' id='shData'>show</button>
                     <button class="btn btn-info" onclick='addData();' id='aData'>add</button>
                     <button class="btn btn-info" onclick='deleteData();' id='dData'>delete</button>
-                </div>
+                </div> -->
 
             </div>
 

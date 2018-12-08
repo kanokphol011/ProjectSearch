@@ -93,7 +93,7 @@ session_start();
             </div>
         </nav>
         <br>
-        <div class="container" class="container-fluid bg-success" style="background-color:#009999;padding-top:13px;padding-bottom:13px">
+        <div class="container" class="container-fluid bg-success" style="background-color:#33c0ca;padding-top:10px;padding-bottom:10px">
             <div class="navbar-header">
                 <h1 style=color:#f4f8f8;>Search</h1>
 

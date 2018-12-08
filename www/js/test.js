@@ -160,14 +160,14 @@ $(
         var choosesName = document.getElementById("choosesName").value;
         var DateFrom = document.getElementById("yearselect").value;
         var DateTo = document.getElementById("yearselectto").value;
-       
+     
        
            // $("#btn").click( function() {
                xmlhttp.open("GET", url, false);
                xmlhttp.send();
                //console.log(DateFrom)
                
-              var url = "reultSearch.htm?id="+choosesName+"&year="+DateFrom+"&to="+DateTo;
+              var url = "resultSearch.php?id="+choosesName+"&year="+DateFrom+"&to="+DateTo;
             // console.log(selector);
        
        

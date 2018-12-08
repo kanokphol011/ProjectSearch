@@ -24,7 +24,9 @@ $(function(){
              to=jsResult["staffcoc"][i]["id"];
             // console.log(to);
             passs = url+'/'+to;
+            
             if(parseInt(jsResult["staffcoc"][i]["id"])===parseInt(tid)){
+              
                name =jsResult["staffcoc"][i]["staffName"].toLowerCase();
                lastname = jsResult["staffcoc"][i]["staffLastName"].toLowerCase();
             
@@ -33,6 +35,7 @@ $(function(){
               //return pop;  
             }
         }
+        console.log(tid+1);
         
         document.getElementById("Name").innerHTML = r+'<h4>('+yearfrom+'&nbsp;-&nbsp;'+yearto+')';
     

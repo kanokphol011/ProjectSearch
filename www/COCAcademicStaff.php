@@ -71,7 +71,7 @@ session_start();
                 </ul>
             </div>
         </nav>
-        <div class="container" style=background-color:#009999;>
+        <div class="container" style=background-color:#33c0ca;>
             <div class="navbar-header">
                 <h1 style=color:#f4f8f8;>Search by COC Academic staff</h1>
 
@@ -88,6 +88,7 @@ session_start();
                         <ul class="nav navbar-nav">&nbsp;</ul>
                         <ul class="nav navbar-nav navbar-left"></ul>
                         <ul class="col-md-9">
+                         
                             <h3>List of COC academic staff</h3>
                             
                         </ul>
@@ -102,11 +103,13 @@ session_start();
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                         <a href="allStaff.php">
-                            <button class="btn btn-info" type="submit" id="searchB">
+                            
+                            <button class="btn btn-primary btn-lg" type="submit" id="searchB">
                                     Search All &nbsp;  &nbsp;   
                             <span class="glyphicon glyphicon-search"></span> </button></a>
                         </ul>
                     </div>
+                  
                 </legend>
                 <div id="show">
                     

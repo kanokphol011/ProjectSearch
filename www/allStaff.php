@@ -48,11 +48,14 @@ session_start();
                     <li class="nav-item active">
                         <h4> <a class="nav-link" href="contact.php">&nbsp;&nbsp;Contact</a></h4>
                     </li>
+                    <li class="nav-item active">
+                        <h4> <a class="nav-link" href="" charset="UTF-8">&nbsp;&nbsp;<?php echo $_SESSION["IDname"];?></a></h4>
+                    </li>
                 </ul>
             </div>
         </nav>
       
-        <div class="container" style=background-color:#009999;>
+        <div class="container" style=background-color:#33c0ca;>
             <div class="navbar-header">
                 <h1 style=color:#f4f8f8;>Search by COC Academic staff</h1>
 
@@ -90,7 +93,7 @@ session_start();
                             var positionaj = ""
                         for(var l =0;l<=pop-1;l++){
                            var option = document.createElement('option');
-                           option.value = l;     
+                           option.value = l+1;     
                            passs = urls+'/'+ option.value;
                            console.log(jsResult["staffcoc"][l]);
                   

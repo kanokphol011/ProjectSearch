@@ -168,7 +168,7 @@ session_start();
                     </div>
                 </nav>
                 <br>
-                <div class="container" class="container-fluid bg-success" style="background-color:#009999;padding-top:20px;padding-bottom:20px">
+                <div class="container" class="container-fluid bg-success" style="background-color:#33c0ca;padding-top:10px;padding-bottom:10px">
                     <div class="navbar-header">
                         <h1 style=color:#f4f8f8;>Search</h1>
         
@@ -183,13 +183,13 @@ session_start();
                         <div class="bs-example">
                             <div class="list-group">
                                 <a href="home.php" class="list-group-item">
-                                    <h3> <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp; All <span class="badge"></span></h3>
+                                    <h4> <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp; All <span class="badge"></span></h4>
                                 </a>
                                 <a href="authors.php" class="list-group-item">
-                                    <h3> <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp; Authors <span class="badge"></span></h3>
+                                    <h4> <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp; Authors <span class="badge"></span></h4>
                                 </a>
                                 <a href="advanced.php" class="list-group-item">
-                                    <h3> <span class="glyphicon glyphicon-zoom-in"></span>&nbsp;&nbsp; Advanced <span class="badge"></span></h3>
+                                    <h4> <span class="glyphicon glyphicon-zoom-in"></span>&nbsp;&nbsp; Advanced <span class="badge"></span></h4>
                                 </a>
         
                             </div>
@@ -204,7 +204,7 @@ session_start();
                         <div class="form-group">
                                 <div class="form-group">
                                 <h5> <label for="title" >Title: </label></h5>
-                            <input type="text"class="form-control col-md-4" id="TitleName" name="TitleName"placeholder="Title name"  >
+                            <input type="text"class="form-control col-md-5" id="TitleName" name="TitleName"placeholder="Title name"  >
                         </div>
                             <!-- <h5><label for="name" >Name: </label></h5>
                             <input type="text" class="form-control col-md-3"id="Nauthor" name="Nauthor" placeholder="Authors name" required="required">
@@ -213,14 +213,14 @@ session_start();
                             <input type="text"class="form-control col-md-3" id="Lauthor" name="Lauthor" placeholder="Authors Lastname" required="required"><br><br><br> -->
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="row col-offsize-md-1">
-			    				<div class="col-xs-4 col-sm-4 col-md-4">
+			    				<div class="col-xs-5 col-sm-5 col-md-5">
 			    					<div class="form-group">
                                             <h5><label for="lastname" >Authors name: </label></h5>
 			                <input type="text" name="Nauthor" id="Nauthor" class="form-control input-sm " placeholder="Authors name">
 			    					</div>
                                 </div>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			    				<div class="col-offsize-sm-2 col-offsize-xs-2 col-offsize-md-2 col-xs-4 col-sm-4 col-md-4">
+			    				<div class="col-offsize-sm-2 col-offsize-xs-2 col-offsize-md-2 col-xs-5 col-sm-5 col-md-5">
 			    					<div class="form-group">
                                             <h5><label for="lastname" >Authors Lastname: </label></h5>
 			    						<input type="text" name="Lauthor" id="Lauthor" class="form-control input-sm"  placeholder="Authors Lastname">
@@ -228,14 +228,14 @@ session_start();
 			    				</div>
                             </div>
                             <div class="row col-offsize-md-1">
-                                    <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <div class="col-xs-5 col-sm-5 col-md-5">
                             <div class="form-group">
                             <h5><label for="name" >Keyword: </label> </h5>
                             <input type="keyword" class="form-control" id="Keyword" name="Keyword" placeholder="Keyword" >
                         </div>
                     </div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="col-xs-4 col-sm-4 col-md-4">
+                    <div class="col-xs-5 col-sm-5 col-md-5">
                         <div class="form-group">
                             <h5><label for="exclude" >Exclude: </label> </h5>
                             <input type="text"class="form-control" id="Exclude" name="Exclude" placeholder="Exclude" >
@@ -308,10 +308,15 @@ session_start();
                                 </div>
                             </div>
                             </form>
+                            
                         </div>
+                        <br>
                     </div>
-                    <div class="col-md-9 " id="showName"></div>
-
+                   
+                    <div class="row">
+                    <div class="col-md-3" ></div>
+                    <div class="col-md-8" id="showName"></div>
+                    </div>
                 </div>
 
                 <br>
