@@ -64,7 +64,7 @@ session_start();
         </div>
 
         <div class="container">
-            <div class="row" style=background-color:#ccccb3;>
+            <div class="row" style=background-color:#f2f1f1;>
 
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

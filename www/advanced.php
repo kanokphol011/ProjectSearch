@@ -177,7 +177,7 @@ session_start();
                 </div>
                 <br>
                 <div class="container">
-                    <div class="row" style=background-color:#ccccb3;>
+                    <div class="row" style=background-color:#f2f1f1;>
         
         
                         <div class="bs-example">

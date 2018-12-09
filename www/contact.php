@@ -58,7 +58,7 @@ session_start();
             </div>
 
         </nav>
-        <div class="container" style=background-color:#009999;>
+        <div class="container" style=background-color:#33c0ca;>
             <div class="navbar-header">
                 <h1 style=color:#f4f8f8;>Contact</h1>
 
@@ -67,7 +67,7 @@ session_start();
         </div>
         <br>
         <div class="container">
-            <div class="row" style=background-color:#ccccb3;>
+            <div class="row" style=background-color:#f2f1f1;>
 
                 <div class="col-md-9">
                     <legend>

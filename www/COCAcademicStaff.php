@@ -82,7 +82,7 @@ session_start();
       
         <br>
         <div class="container">
-            <div class="row" style=background-color:#ccccb3;>
+            <div class="row" style=background-color:#f2f1f1;>
                 <legend>
                     <div class="collapse navbar-collapse" id="app-navbar-collapse">
                         <ul class="nav navbar-nav">&nbsp;</ul>
