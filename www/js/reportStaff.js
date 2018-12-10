@@ -19,6 +19,8 @@ var checkStockData = new Array;
 var dataScopusID = new Array;
 var stockDatabase = new Array;
 
+
+
 $(function(){
     // is the string "id"
     
@@ -430,19 +432,19 @@ function showData(){
             
         }
     }
-    return checkStockData;
+    // return checkStockData;
     
 }
 
-$(function(){
-    if(showData() !== null){
-        console.log("6789");
-    }
-    if(showData() === 'undefined'){
-        console.log("7777");
-    }
+// $(function(){
+//     if(showData() !== null){
+//         console.log("6789");
+//     }
+//     if(showData() === 'undefined'){
+//         console.log("7777");
+//     }
 
-})
+// })
 
 $(function(){
     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
@@ -502,6 +504,6 @@ function deleteData(){
 }
 
 $(function(){
-        console.log(dataScopusID);
+        // console.log(dataScopusID);
 })
 

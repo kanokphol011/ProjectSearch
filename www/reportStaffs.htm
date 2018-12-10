@@ -11,6 +11,7 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   
+  
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/index.css">
@@ -27,17 +28,20 @@ session_start();
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <ul class="nav navbar-nav">&nbsp;</ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="logout.php" id="btn">Logout</a>
+                        <li class="nav-item active">
+                            <h4> <a class="nav-link" href="logout.php">&nbsp;&nbsp;Logout </a></h4>
                         </li>
-                        <li>
-                            <a href="home.php" id="btn">Search</a>
+                        <li class="nav-item active">
+                            <h4> <a class="nav-link" href="home.php">&nbsp;&nbsp;Search <span class="sr-only">(current)</span></a></h4>
                         </li>
-                        <li>
-                            <a href="COCAcademicStaff.php" id="btn">COC Academic Staff</a>
+                        <li class="nav-item active">
+                            <h4> <a class="nav-link" href="COCAcademicStaff.php">&nbsp;&nbsp;COC Academic Staff</a></h4>
                         </li>
-                        <li>
-                            <a href="contact.php" id="btn">Contact</a>
+                        <li class="nav-item active">
+                            <h4> <a class="nav-link" href="contact.php">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a></h4>
+                        </li>
+                        <li class="nav-item active">
+                            <h4> <a class="nav-link" href="" id="userD" charset="UTF-8">&nbsp;&nbsp;</a></h4>
                         </li>
                         
                     </ul>
@@ -125,6 +129,7 @@ session_start();
 
     </div>
     
+    <script src="js/user.js"></script>
     <script src="js/reportStaff.js"></script>
 
 
