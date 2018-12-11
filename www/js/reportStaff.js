@@ -58,7 +58,11 @@ $(function(){
     }   
     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
-    url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+(yearto+1)+''+y;
+    url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+(yearfrom-1)+'%20AND%20PUBYEAR%20<%20'+(yearto+1)+''+y;
+
+    if(yearfrom==yearto){
+        url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20=%20'+yearfrom+''+y;
+    }
 
     console.log(url);
     xmlhttp.open("GET", url, false);
@@ -125,7 +129,8 @@ $(function(){
 
             // scopusID
             var scopusID = jsResult["search-results"]["entry"][i]["dc:identifier"];
-            dataScopusID[i] = parseInt(scopusID.split("SCOPUS_ID:").pop());
+            dataScopusID[i] = scopusID.split("SCOPUS_ID:").pop();
+            console.log(dataScopusID[i]);
             
         }
 
@@ -231,6 +236,9 @@ $(function(){
     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
     url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+1+''+y;
+    if(yearfrom==yearto){
+        url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20=%20'+yearfrom+''+y;
+    }
     // console.log('get success');
     xmlhttp.open("GET", url, false);
     xmlhttp.send();
@@ -356,6 +364,9 @@ function downloadCSV(args) {
     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
     url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+1+''+y;
+    if(yearfrom==yearto){
+        url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20=%20'+yearfrom+''+y;
+    }
     console.log('get success');
     xmlhttp.open("GET", url, false);
     xmlhttp.send();
@@ -405,36 +416,7 @@ function downloadCSV(args) {
 
 
 
-function showData(){
-    
-    xmlhttp.open("GET", "php/getData.php", true);
-    xmlhttp.send();
 
-    xmlhttp.onreadystatechange = function()
-    {
-        if(this.readyState == 4 && this.status == 200)
-        {
-            var sss = JSON.parse(this.responseText);
-            console.log(sss);
-            var html = "";
-            for (var a = 0; a < sss.length; a++)
-            {
-                
-                checkStockData[a] = {ID: sss[a].ID,
-                                    Name: sss[a].staffName,
-                                    LName: sss[a].staffLName, 
-                                    Article: sss[a].article,
-                                    PublicationYear: sss[a].pupdate, 
-                                    ArticleType: sss[a].articleType, 
-                                    Citation: sss[a].cite
-                                    };                    
-            }
-            
-        }
-    }
-    // return checkStockData;
-    
-}
 
 // $(function(){
 //     if(showData() !== null){
@@ -450,6 +432,9 @@ $(function(){
     var x ='https://api.elsevier.com/content/search/scopus?query=ALL(';
     var y='&apiKey=185547eee67ed06e5e817a0f227d23fe';
     url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20>%20'+yearfrom+'%20AND%20PUBYEAR%20<%20'+yearto+1+''+y;
+    if(yearfrom==yearto){
+        url =x+name+'%20AND%20'+lastname+')AND%20PUBYEAR%20=%20'+yearfrom+''+y;
+    }
     xmlhttp.open("GET", url, false);
     xmlhttp.send();
     
@@ -483,7 +468,7 @@ $(function(){
 function addData() {
 
      console.log(stockDatabase);
-     console.log(checkStockData); 
+    //  console.log(checkStockData); 
     
     var myJsonString = JSON.stringify(stockDatabase);
     xmlhttp.onreadystatechange = respond;
@@ -495,7 +480,40 @@ function addData() {
             document.getElementById('showResult').innerHTML = xmlhttp.responseText;
         }
     }
+    // xmlhttp.abort();
 }
+
+$(function(){
+    
+    xmlhttp.open("GET", "php/getData.php", true);
+    xmlhttp.send();
+
+    xmlhttp.onreadystatechange = function()
+    {
+        if(this.readyState == 4 && this.status == 200)
+        {
+            var sss = JSON.parse(this.responseText);
+            console.log(sss);
+            var html = "";
+            for (var a = 0; a < sss.length; a++)
+            {
+                
+                checkStockData[a] = {ID: sss[a].ID,
+                                    Name: sss[a].staffName,
+                                    LName: sss[a].staffLName, 
+                                    Article: sss[a].article,
+                                    PublicationYear: sss[a].pupdate, 
+                                    ArticleType: sss[a].articleType, 
+                                    Citation: sss[a].cite
+                                    };                    
+            }
+            
+        }
+    }
+    console.log(checkStockData);
+    // return checkStockData;
+    
+})
 
 function deleteData(){
     xmlhttp.open("GET", "php/deleteData.php", true);
